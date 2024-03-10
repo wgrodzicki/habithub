@@ -18,5 +18,32 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  /*margin-bottom: 60px;*/
+  background-color: #495057;
+  height: 100vh;
+}
+
+#main-container {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+#navbar-column {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    max-height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.bi {
+    vertical-align: -.125em;
+    pointer-events: none;
+    fill: currentColor;
+}
+
+.nav-item:hover {
+    background-color: lightgray;
+    color: black;
 }

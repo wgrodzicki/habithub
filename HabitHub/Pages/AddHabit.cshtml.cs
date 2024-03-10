@@ -5,22 +5,22 @@ using Microsoft.Data.Sqlite;
 
 namespace HabitHub.Pages
 {
-    public class AddRecordModel : PageModel
+    public class AddHabitModel : PageModel
     {
-		[BindProperty]
-		public HabitRecordModel HabitRecord { get; set; }
+        [BindProperty]
+        public HabitModel Habit { get; set; }
 
-		private readonly IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
-        public AddRecordModel(IConfiguration configuration)
+        public AddHabitModel(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
-		public IActionResult OnGet()
-		{
-			return Page();
-		}
+        public IActionResult OnGet()
+        {
+            return Page();
+        }
 
         public IActionResult OnPost()
         {
@@ -34,12 +34,12 @@ namespace HabitHub.Pages
                 connection.Open();
                 var tableCmd = connection.CreateCommand();
                 tableCmd.CommandText =
-                    @$"INSERT INTO habit_records(amount, unit, date)
-                      VALUES('{HabitRecord.Amount}', '{HabitRecord.Unit}', '{HabitRecord.Date}')";
+                    $@"INSERT INTO habits (habit_name)
+                       VALUES('{Habit.HabitName}')";
                 tableCmd.ExecuteNonQuery();
             }
 
             return RedirectToPage("./Index");
         }
-	}
+    }
 }
