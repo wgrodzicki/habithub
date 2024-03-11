@@ -20,20 +20,7 @@ namespace HabitHub.Pages
 
         public void OnGet()
         {
-            // 
-            using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
-            {
-                connection.Open();
-                var tableCmd = connection.CreateCommand();
-                tableCmd.CommandText =
-                    @$"SELECT habit_name FROM habits";
-                tableCmd.CommandType = System.Data.CommandType.Text;
-                SqliteDataReader reader = tableCmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    string? habitName = Convert.ToString(reader["habit_name"]);
-                }
-            }
+
         }
     }
 }

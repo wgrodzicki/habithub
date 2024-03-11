@@ -1,28 +1,26 @@
 ﻿@page
 @model HabitHub.Pages.AddHabitModel
 @{
-
+	ViewData["Title"] = "Add habit";
 }
 
-<h2>Add new habit</h2>
-<hr />
-<div class="row">
+<hr class="text-white" />
+<h3 class="text-white">Add new habit</h3>
+<hr class="text-white" />
+<div class="row text-white">
 	<div class="col-md-4">
 		<form method="post">
 			<div class="form-group">
-				<label asp-for="Habit.HabitName" class="control-label"></label>
+				<label asp-for="Habit.HabitName" class="control-label">Habit name</label>
 				<input type="text" asp-for="Habit.HabitName" class="form-control" />
 				<span asp-validation-for="Habit.HabitName" class="text-danger"></span>
 			</div>
+			<br />
 			<div class="form-group">
-				<input type="submit" value="Add" class="btn btn-success" />
+				<input type="submit" value="Add habit" class="btn btn-dark" />
 			</div>
 		</form>
 	</div>
-</div>
-
-<div>
-	<a asp-page="Index">Back</a>
 </div>
 
 @section Scripts {

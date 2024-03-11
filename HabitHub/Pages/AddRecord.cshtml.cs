@@ -9,22 +9,42 @@ namespace HabitHub.Pages
     {
 		[BindProperty]
 		public HabitRecordModel HabitRecord { get; set; }
+		[BindProperty]
+		public string HabitToSave { get; set; }
+		public List<string> SavedHabits { get; set; }
+
 
 		private readonly IConfiguration _configuration;
 
         public AddRecordModel(IConfiguration configuration)
         {
             _configuration = configuration;
+            SavedHabits = new List<string>();
         }
 
 		public IActionResult OnGet()
 		{
+			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
+			{
+				connection.Open();
+				var tableCmd = connection.CreateCommand();
+				tableCmd.CommandText =
+					@"SELECT habit_name FROM habits";
+				tableCmd.CommandType = System.Data.CommandType.Text;
+				SqliteDataReader reader = tableCmd.ExecuteReader();
+				while (reader.Read())
+				{
+					SavedHabits.Add(Convert.ToString(reader["habit_name"]));
+				}
+			}
 			return Page();
 		}
 
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
+			string test = HabitToSave;
+
+			if (!ModelState.IsValid)
             {
                 return Page();
             }

@@ -1,38 +1,49 @@
 ﻿@page
 @model HabitHub.Pages.AddRecordModel
 @{
-
+	ViewData["Title"] = "Record habit";
 }
 
-<h2>Add new record</h2>
-<hr />
-<div class="row">
+<hr class="text-white" />
+<h3 class="text-white">Add new record</h3>
+<hr class="text-white" />
+<div class="row text-white">
 	<div class="col-md-4">
 		<form method="post">
 			<div class="form-group">
-				<label asp-for="HabitRecord.Amount" class="control-label"></label>
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Select habit
+					</button>
+					<ul class="dropdown-menu">
+						@foreach (string savedHabit in Model.SavedHabits)
+						{
+							<li><a class="dropdown-item">@savedHabit</a></li>
+						}
+					</ul>
+				</div>
+			</div>
+			<div class="form-group">
+				<label asp-for="HabitRecord.Amount" class="control-label">Amount</label>
 				<input type="number" asp-for="HabitRecord.Amount" class="form-control" />
 				<span asp-validation-for="HabitRecord.Amount" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="HabitRecord.Unit" class="control-label"></label>
+				<label asp-for="HabitRecord.Unit" class="control-label">Unit</label>
 				<input type="text" asp-for="HabitRecord.Unit" class="form-control" />
 				<span asp-validation-for="HabitRecord.Unit" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="HabitRecord.Date" class="control-label"></label>
+				<label asp-for="HabitRecord.Date" class="control-label">Date</label>
 				<input type="date" asp-for="HabitRecord.Date" class="form-control" />
 				<span asp-validation-for="HabitRecord.Date" class="text-danger"></span>
 			</div>
+			<br />
 			<div class="form-group">
-				<input type="submit" value="Add" class="btn btn-success" />
+				<input type="submit" value="Add record" class="btn btn-dark" />
 			</div>
 		</form>
 	</div>
-</div>
-
-<div>
-	<a asp-page="Index">Back</a>
 </div>
 
 @section Scripts {
