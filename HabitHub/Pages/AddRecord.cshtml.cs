@@ -42,8 +42,6 @@ namespace HabitHub.Pages
 
         public IActionResult OnPost()
         {
-			string test = HabitToSave;
-
 			if (!ModelState.IsValid)
             {
                 return Page();
@@ -54,8 +52,12 @@ namespace HabitHub.Pages
                 connection.Open();
                 var tableCmd = connection.CreateCommand();
                 tableCmd.CommandText =
-                    @$"INSERT INTO habit_records(amount, unit, date)
-                      VALUES('{HabitRecord.Amount}', '{HabitRecord.Unit}', '{HabitRecord.Date}')";
+                    @$"INSERT INTO habit_records(habits_id, amount, unit, date)
+						VALUES(
+							(SELECT id
+							FROM habits
+							WHERE habit_name = '{HabitToSave}'),
+							'{HabitRecord.Amount}', '{HabitRecord.Unit}', '{HabitRecord.Date}')";
                 tableCmd.ExecuteNonQuery();
             }
 

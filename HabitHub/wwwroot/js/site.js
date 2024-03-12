@@ -15,4 +15,15 @@ document.addEventListener("DOMContentLoaded", () => {
             event.target.className = "nav-link text-white";
         });
     }
+
+    if (document.title == "Record habit - HabitHub") {
+        const dropdownItems = document.getElementsByClassName("dropdown-item");
+
+        for (let i = 0; i < dropdownItems.length; i++) {
+            dropdownItems[i].addEventListener("click", (event) => {
+                document.getElementById("habit-dropdown-button").innerHTML = event.target.innerHTML;
+                document.getElementById("habit-input").value = event.target.innerHTML;
+            });
+        }
+    }
 });
