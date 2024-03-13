@@ -4,7 +4,6 @@
 	ViewData["Title"] = "Record habit";
 }
 
-<hr class="text-white" />
 <h3 class="text-white">Record habit</h3>
 <hr class="text-white" />
 <div class="row text-white">
@@ -36,12 +35,12 @@
 			</div>
 			<div class="form-group">
 				<label asp-for="HabitRecord.Date" class="control-label">Date</label>
-				<input type="date" asp-for="HabitRecord.Date" class="form-control" />
+				<input type="datetime-local" asp-for="HabitRecord.Date" class="form-control" />
 				<span asp-validation-for="HabitRecord.Date" class="text-danger"></span>
 			</div>
 			<br />
 			<div class="form-group">
-				<input type="submit" value="Add record" class="btn btn-dark" />
+				<input type="submit" value="Record habit" class="btn btn-dark" />
 			</div>
 		</form>
 	</div>

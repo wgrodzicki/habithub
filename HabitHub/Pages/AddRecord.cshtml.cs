@@ -7,10 +7,8 @@ namespace HabitHub.Pages
 {
     public class AddRecordModel : PageModel
     {
-		[BindProperty]
-		public HabitRecordModel HabitRecord { get; set; }
-		[BindProperty]
-		public string HabitToSave { get; set; }
+		[BindProperty] public HabitRecordModel HabitRecord { get; set; }
+		[BindProperty] public string HabitToSave { get; set; }
 		public List<string> SavedHabits { get; set; }
 
 
@@ -29,7 +27,7 @@ namespace HabitHub.Pages
 				connection.Open();
 				var tableCmd = connection.CreateCommand();
 				tableCmd.CommandText =
-					@"SELECT habit_name FROM habits";
+					@"SELECT habit_name FROM habits;";
 				tableCmd.CommandType = System.Data.CommandType.Text;
 				SqliteDataReader reader = tableCmd.ExecuteReader();
 				while (reader.Read())
@@ -53,11 +51,10 @@ namespace HabitHub.Pages
                 var tableCmd = connection.CreateCommand();
                 tableCmd.CommandText =
                     @$"INSERT INTO habit_records(habits_id, amount, unit, date)
-						VALUES(
-							(SELECT id
-							FROM habits
-							WHERE habit_name = '{HabitToSave}'),
-							'{HabitRecord.Amount}', '{HabitRecord.Unit}', '{HabitRecord.Date}')";
+					   VALUES((SELECT id
+							   FROM habits
+							   WHERE habit_name = '{HabitToSave}'),
+							   '{HabitRecord.Amount}', '{HabitRecord.Unit}', '{HabitRecord.Date}');";
                 tableCmd.ExecuteNonQuery();
             }
 

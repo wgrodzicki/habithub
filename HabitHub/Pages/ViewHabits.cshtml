@@ -1,0 +1,33 @@
+﻿@page
+@model HabitHub.Pages.ViewHabitsModel
+@{
+	ViewData["Title"] = "View habits";
+}
+
+<h3 class="text-white">My habits</h3>
+<hr class="text-white" />
+<div class="row text-white">
+	<div class="col-md-8">
+		<table class="table text-white">
+			<thead>
+				<tr>
+					<th scope="col">Habit</th>
+					<th scope="col">Amount</th>
+					<th scope="col">Unit</th>
+					<th scope="col">Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var habitRecord in Model.HabitRecords)
+				{
+					<tr>
+						<td>@Model.GetHabitName(habitRecord)</td>
+						<td>@habitRecord.Amount</td>
+						<td>@habitRecord.Unit</td>
+						<td>@habitRecord.Date</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -7,8 +7,7 @@ namespace HabitHub.Pages
 {
     public class AddHabitModel : PageModel
     {
-        [BindProperty]
-        public HabitModel Habit { get; set; }
+        [BindProperty] public HabitModel Habit { get; set; }
 
         private readonly IConfiguration _configuration;
 
@@ -35,7 +34,7 @@ namespace HabitHub.Pages
                 var tableCmd = connection.CreateCommand();
                 tableCmd.CommandText =
                     $@"INSERT INTO habits (habit_name)
-                       VALUES('{Habit.HabitName}')";
+                       VALUES('{Habit.HabitName}');";
                 tableCmd.ExecuteNonQuery();
             }
 
