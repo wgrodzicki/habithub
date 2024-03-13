@@ -1,3 +1,4 @@
+using HabitHub.Data;
 using HabitHub.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -25,15 +26,8 @@ namespace HabitHub.Pages
 			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
 			{
 				connection.Open();
-				var tableCmd = connection.CreateCommand();
-				tableCmd.CommandText =
-					@"SELECT habit_name FROM habits;";
-				tableCmd.CommandType = System.Data.CommandType.Text;
-				SqliteDataReader reader = tableCmd.ExecuteReader();
-				while (reader.Read())
-				{
-					SavedHabits.Add(Convert.ToString(reader["habit_name"]));
-				}
+
+                HabitsRepository.GetHabitNames(connection, SavedHabits);
 			}
 			return Page();
 		}

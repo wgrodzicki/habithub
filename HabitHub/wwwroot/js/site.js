@@ -4,6 +4,16 @@
 // Write your JavaScript code.
 
 document.addEventListener("DOMContentLoaded", () => {
+    changeNavbarPillColor();
+
+    if (document.title == "Record habit - HabitHub") {
+        getHabitFromDropdown();
+    }
+
+});
+
+// Changes navbar pill color on hover.
+function changeNavbarPillColor() {
     const navbarPills = document.getElementsByClassName("nav-link text-white");
 
     for (let i = 0; i < navbarPills.length; i++) {
@@ -15,15 +25,16 @@ document.addEventListener("DOMContentLoaded", () => {
             event.target.className = "nav-link text-white";
         });
     }
+}
 
-    if (document.title == "Record habit - HabitHub") {
-        const dropdownItems = document.getElementsByClassName("dropdown-item");
+// Retrieves habit name from a dropdown menu.
+function getHabitFromDropdown() {
+    const dropdownItems = document.getElementsByClassName("dropdown-item");
 
-        for (let i = 0; i < dropdownItems.length; i++) {
-            dropdownItems[i].addEventListener("click", (event) => {
-                document.getElementById("habit-dropdown-button").innerHTML = event.target.innerHTML;
-                document.getElementById("habit-input").value = event.target.innerHTML;
-            });
-        }
+    for (let i = 0; i < dropdownItems.length; i++) {
+        dropdownItems[i].addEventListener("click", (event) => {
+            document.getElementById("habit-dropdown-button").innerHTML = event.target.innerHTML;
+            document.getElementById("habit-input").value = event.target.innerHTML;
+        });
     }
-});
+}

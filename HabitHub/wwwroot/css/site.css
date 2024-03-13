@@ -1,3 +1,4 @@
+/* General */
 html {
     font-size: 14px;
     position: relative;
@@ -24,11 +25,13 @@ main {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
+
 #main-container {
     margin: 0 0 0 0;
     padding: 0 0 0 0;
 }
 
+/* Side navbar **/
 #navbar-column {
     font-size: 16px;
     display: flex;
@@ -49,3 +52,9 @@ main {
     background-color: lightgray;
     color: black;
 }
+
+
+#habit-dropdown-button {
+    margin-bottom: 12px;
+}
+
