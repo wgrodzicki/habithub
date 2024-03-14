@@ -35,12 +35,11 @@ namespace HabitHub.Pages
         {
             if (!ModelState.IsValid)
             {
+				// Validate only the Add habit form
 				foreach (var state in ModelState)
 				{
 					if (state.Key == Habit.HabitName.ToString() && state.Value.ValidationState == ModelValidationState.Invalid)
-					{
 						return OnGet();
-					}
 				}
             }
 
@@ -56,12 +55,11 @@ namespace HabitHub.Pages
 		{
 			if (!ModelState.IsValid)
 			{
+				// Validate only the Delete habit form
 				foreach (var state in ModelState)
 				{
 					if (state.Key == nameof(HabitToDelete) && state.Value.ValidationState == ModelValidationState.Invalid)
-					{
 						return OnGet();
-					}
 				}
 			}
 

@@ -26,7 +26,6 @@ namespace HabitHub.Pages
 			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
 			{
 				connection.Open();
-
 				HabitsRepository.GetHabits(connection, Habits);
 				HabitsRepository.GetHabitRecords(connection, HabitRecords);
 			}
@@ -41,6 +40,7 @@ namespace HabitHub.Pages
 		public string GetHabitName(HabitRecordModel habitRecord)
 		{
 			var habit = Habits.FirstOrDefault(x => x.Id == habitRecord.HabitsId);
+
 			if (habit != null)
 				return habit.HabitName.ToString();
 			else

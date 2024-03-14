@@ -34,9 +34,7 @@ namespace HabitHub.Pages
         public IActionResult OnPostAdd()
         {
 			if (!ModelState.IsValid)
-            {
                 return OnGet();
-            }
 
             using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
             {
