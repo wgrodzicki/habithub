@@ -6,7 +6,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     changeNavbarPillColor();
 
-    if (document.title == "Record habit - HabitHub") {
+    if (document.title == "Record habit - HabitHub" || document.title == "Add habit - HabitHub") {
         getHabitFromDropdown();
     }
 

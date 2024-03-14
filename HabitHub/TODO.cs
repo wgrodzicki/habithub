@@ -13,7 +13,7 @@
 // -> Adding new habits ✓
 // -> Recording habits ✓
 // -> Displaying recorded habits ✓
-// -> Delete habits
+// -> Delete habits ✓ (Add ON DELETE CASCADE to the 'habits' table!!!!)
 // -> Deleting recorded habits
 // -> Editing (updating) existing habits (modal?)
 // -> Filtering recorded habits:

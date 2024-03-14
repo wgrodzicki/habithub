@@ -9,7 +9,7 @@ namespace HabitHub.Pages
     public class AddRecordModel : PageModel
     {
 		[BindProperty] public HabitRecordModel HabitRecord { get; set; }
-		[BindProperty] public string HabitToSave { get; set; }
+		[BindProperty] public string HabitToRecord { get; set; }
 		public List<string> SavedHabits { get; set; }
 
 
@@ -26,33 +26,24 @@ namespace HabitHub.Pages
 			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
 			{
 				connection.Open();
-
                 HabitsRepository.GetHabitNames(connection, SavedHabits);
 			}
 			return Page();
 		}
 
-        public IActionResult OnPost()
+        public IActionResult OnPostAdd()
         {
 			if (!ModelState.IsValid)
             {
-                return Page();
+                return OnGet();
             }
 
             using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
             {
-                connection.Open();
-                var tableCmd = connection.CreateCommand();
-                tableCmd.CommandText =
-                    @$"INSERT INTO habit_records(habits_id, amount, unit, date)
-					   VALUES((SELECT id
-							   FROM habits
-							   WHERE habit_name = '{HabitToSave}'),
-							   '{HabitRecord.Amount}', '{HabitRecord.Unit}', '{HabitRecord.Date}');";
-                tableCmd.ExecuteNonQuery();
-            }
-
-            return RedirectToPage("./Index");
-        }
+				connection.Open();
+				HabitsRepository.AddHabitRecord(connection, HabitToRecord, HabitRecord);
+			}
+			return OnGet();
+		}
 	}
 }

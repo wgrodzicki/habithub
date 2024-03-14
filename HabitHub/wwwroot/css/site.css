@@ -31,6 +31,24 @@ main {
     padding: 0 0 0 0;
 }
 
+.form-control {
+    max-width: 200px;
+}
+
+#habit-dropdown {
+    padding-top: 24px;
+}
+
+#add-habit-button, #add-record-button {
+    background-color: #014000;
+    border-color: #014000;
+}
+
+#delete-habit-button, #delete-record-button {
+    background-color: #6C2126;
+    border-color: #6C2126;
+}
+
 /* Side navbar **/
 #navbar-column {
     font-size: 16px;
@@ -52,9 +70,3 @@ main {
     background-color: lightgray;
     color: black;
 }
-
-
-#habit-dropdown-button {
-    margin-bottom: 12px;
-}
-

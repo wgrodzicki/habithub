@@ -1,5 +1,7 @@
+using HabitHub.Data;
 using HabitHub.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.Sqlite;
 
@@ -8,37 +10,67 @@ namespace HabitHub.Pages
     public class AddHabitModel : PageModel
     {
         [BindProperty] public HabitModel Habit { get; set; }
-
-        private readonly IConfiguration _configuration;
+		[BindProperty] public string HabitToDelete { get; set; }
+		public List<string> SavedHabits { get; set; }
+		
+		private readonly IConfiguration _configuration;
 
         public AddHabitModel(IConfiguration configuration)
         {
             _configuration = configuration;
-        }
+			SavedHabits = new List<string>();
+		}
 
         public IActionResult OnGet()
         {
-            return Page();
-        }
+			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
+			{
+				connection.Open();
+				HabitsRepository.GetHabitNames(connection, SavedHabits);
+			}
+			return Page();
+		}
 
-        public IActionResult OnPost()
+        public IActionResult OnPostAdd()
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+				foreach (var state in ModelState)
+				{
+					if (state.Key == Habit.HabitName.ToString() && state.Value.ValidationState == ModelValidationState.Invalid)
+					{
+						return OnGet();
+					}
+				}
             }
 
             using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
             {
-                connection.Open();
-                var tableCmd = connection.CreateCommand();
-                tableCmd.CommandText =
-                    $@"INSERT INTO habits (habit_name)
-                       VALUES('{Habit.HabitName}');";
-                tableCmd.ExecuteNonQuery();
-            }
+				connection.Open();
+				HabitsRepository.AddHabit(connection, Habit);
+			}
+			return OnGet();
+		}
 
-            return RedirectToPage("./Index");
-        }
-    }
+		public IActionResult OnPostDelete()
+		{
+			if (!ModelState.IsValid)
+			{
+				foreach (var state in ModelState)
+				{
+					if (state.Key == nameof(HabitToDelete) && state.Value.ValidationState == ModelValidationState.Invalid)
+					{
+						return OnGet();
+					}
+				}
+			}
+
+			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
+			{
+				connection.Open();
+				HabitsRepository.DeleteHabit(connection, HabitToDelete);
+			}
+			return OnGet();
+		}
+	}
 }

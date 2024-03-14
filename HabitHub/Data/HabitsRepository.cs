@@ -8,6 +8,21 @@ namespace HabitHub.Data;
 public static class HabitsRepository
 {
 	/// <summary>
+	/// Adds a new record to the 'habits' table.
+	/// </summary>
+	/// <param name="connection"></param>
+	/// <param name="habit"></param>
+	public static void AddHabit(SqliteConnection connection, HabitModel habit)
+	{
+		connection.Open();
+		var tableCmd = connection.CreateCommand();
+		tableCmd.CommandText =
+			$@"INSERT INTO habits (habit_name)
+                       VALUES('{habit.HabitName}');";
+		tableCmd.ExecuteNonQuery();
+	}
+
+	/// <summary>
 	/// Retrieves all data from the 'habits' table.
 	/// </summary>
 	/// <param name="connection"></param>
@@ -46,6 +61,40 @@ public static class HabitsRepository
 		{
 			habitNames.Add(Convert.ToString(reader["habit_name"]));
 		}
+	}
+
+	/// <summary>
+	/// Deletes a record from the 'habits' table based on the habit name given.
+	/// </summary>
+	/// <param name="connection"></param>
+	/// <param name="habitName"></param>
+	public static void DeleteHabit(SqliteConnection connection, string habitName)
+	{
+		connection.Open();
+		var tableCmd = connection.CreateCommand();
+		tableCmd.CommandText =
+			$@"DELETE FROM habits
+			   WHERE habit_name LIKE %{habitName}%;";
+		tableCmd.ExecuteNonQuery();
+	}
+
+	/// <summary>
+	/// Adds a habit record to the 'habit_records' table.
+	/// </summary>
+	/// <param name="connection"></param>
+	/// <param name="habitToRecord"></param>
+	/// <param name="habitRecord"></param>
+	public static void AddHabitRecord(SqliteConnection connection, string habitToRecord, HabitRecordModel habitRecord)
+	{
+		connection.Open();
+		var tableCmd = connection.CreateCommand();
+		tableCmd.CommandText =
+			@$"INSERT INTO habit_records(habits_id, amount, unit, date)
+			   VALUES((SELECT id
+					   FROM habits
+					   WHERE habit_name = '{habitToRecord}'),
+					   '{habitRecord.Amount}', '{habitRecord.Unit}', '{habitRecord.Date}');";
+		tableCmd.ExecuteNonQuery();
 	}
 
 	/// <summary>
