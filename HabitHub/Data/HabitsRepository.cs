@@ -12,13 +12,13 @@ public static class HabitsRepository
 	/// </summary>
 	/// <param name="connection"></param>
 	/// <param name="habit"></param>
-	public static void AddHabit(SqliteConnection connection, HabitModel habit)
+	public static void AddHabit(SqliteConnection connection, HabitModel habitToAdd)
 	{
 		connection.Open();
 		var tableCmd = connection.CreateCommand();
 		tableCmd.CommandText =
 			$@"INSERT INTO habits (habit_name)
-                       VALUES('{habit.HabitName}');";
+                       VALUES('{habitToAdd.HabitName}');";
 		tableCmd.ExecuteNonQuery();
 	}
 
@@ -68,13 +68,13 @@ public static class HabitsRepository
 	/// </summary>
 	/// <param name="connection"></param>
 	/// <param name="habitName"></param>
-	public static void DeleteHabit(SqliteConnection connection, string habitName)
+	public static void DeleteHabit(SqliteConnection connection, string habitToDelete)
 	{
 		connection.Open();
 		var tableCmd = connection.CreateCommand();
 		tableCmd.CommandText =
 			$@"DELETE FROM habits
-			   WHERE habit_name LIKE %{habitName}%;";
+			   WHERE habit_name LIKE '%{habitToDelete}%';";
 		tableCmd.ExecuteNonQuery();
 	}
 
@@ -121,5 +121,20 @@ public static class HabitsRepository
 			});
 		}
 		reader.Close();
+	}
+
+	/// <summary>
+	/// Deletes a record from the 'habit_records' table based on the record id given.
+	/// </summary>
+	/// <param name="connection"></param>
+	/// <param name="recordToDelete"></param>
+	public static void DeleteRecord(SqliteConnection connection, int recordToDelete)
+	{
+		connection.Open();
+		var tableCmd = connection.CreateCommand();
+		tableCmd.CommandText =
+			$@"DELETE FROM habit_records
+			   WHERE id = {recordToDelete};";
+		tableCmd.ExecuteNonQuery();
 	}
 }

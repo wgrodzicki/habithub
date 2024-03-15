@@ -11,6 +11,7 @@ namespace HabitHub.Pages
 	{
 		[BindProperty] public List<HabitModel> Habits { get; set; }
 		[BindProperty] public List<HabitRecordModel> HabitRecords { get; set; }
+		[BindProperty] public int RecordToDelete { get; set; }
 
 		private readonly IConfiguration _configuration;
 
@@ -30,6 +31,16 @@ namespace HabitHub.Pages
 				HabitsRepository.GetHabitRecords(connection, HabitRecords);
 			}
 			return Page();
+		}
+
+		public IActionResult OnPostDelete()
+		{
+			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
+			{
+				connection.Open();
+				HabitsRepository.DeleteRecord(connection, RecordToDelete);
+			}
+			return OnGet();
 		}
 
 		/// <summary>

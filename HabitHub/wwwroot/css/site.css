@@ -44,9 +44,19 @@ main {
     border-color: #014000;
 }
 
+#add-habit-button:hover, #add-record-button:hover {
+    background-color: #012e00;
+    border-color: #012e00;
+}
+
 #delete-habit-button, #delete-record-button {
     background-color: #6C2126;
     border-color: #6C2126;
+}
+
+#delete-habit-button:hover, #delete-record-button:hover {
+    background-color: #4f161a;
+    border-color: #4f161a;
 }
 
 /* Side navbar **/

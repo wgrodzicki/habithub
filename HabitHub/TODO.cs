@@ -13,8 +13,9 @@
 // -> Adding new habits ✓
 // -> Recording habits ✓
 // -> Displaying recorded habits ✓
-// -> Delete habits ✓ (Add ON DELETE CASCADE to the 'habits' table!!!!)
-// -> Deleting recorded habits
+// -> Delete habits: ✓
+//		-Add ON DELETE CASCADE to the 'habits' table ✓
+// -> Deleting recorded habits ✓
 // -> Editing (updating) existing habits (modal?)
 // -> Filtering recorded habits:
 //		-by habit
@@ -27,4 +28,4 @@
 // -> Password hashing
 // -> Add habit location (geolocation API: https://www.abstractapi.com/api/ip-geolocation-api)
 // -> Export/import habits to/from Excel
-// -> Unit test
+// -> Unit tests

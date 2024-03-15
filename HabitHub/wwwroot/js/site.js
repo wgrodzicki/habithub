@@ -5,6 +5,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     changeNavbarPillColor();
+    cleanForms();
 
     if (document.title == "Record habit - HabitHub" || document.title == "Add habit - HabitHub") {
         getHabitFromDropdown();
@@ -24,6 +25,15 @@ function changeNavbarPillColor() {
         navbarPills[i].addEventListener("mouseout", (event) => {
             event.target.className = "nav-link text-white";
         });
+    }
+}
+
+// Cleans all forms on loading.
+function cleanForms() {
+    const forms = document.getElementsByClassName("form-control");
+
+    for (let i = 0; i < forms.length; i++) {
+        forms[i].value = null;
     }
 }
 
