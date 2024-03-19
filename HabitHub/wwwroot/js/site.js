@@ -54,23 +54,8 @@ function getHabitFromDropdown() {
     }
 }
 
+// Populates the modal with the currently selected record data.
 function populateModal() {
-    //let viewRecordsTable = document.getElementById("table-view-records");
-    //let rowIndex = 0;
-    //let editRecordTable = document.getElementById("table-edit-record");
-    //const editRecordButton = document.getElementsByClassName("edit-button");
-
-    //for (let i = 0; i < editRecordButton.length; i++) {
-
-    //    editRecordButton[i].addEventListener("click", (event) => {
-
-    //        rowIndex = event.target.id;
-
-    //        //editRecordTable
-
-    //    });
-    //}
-
     let recordsTable = document.getElementById("table-view-records");
     const editButtons = recordsTable.getElementsByTagName("button");
 
@@ -78,46 +63,45 @@ function populateModal() {
         editButtons[i].addEventListener("click", (event) => {
 
             let editRecordRow = event.target.id;
+
             document.getElementById("habit-dropdown-button").innerHTML = recordsTable.rows[editRecordRow].cells[0].innerHTML;
             document.getElementById("edit-record-amount").value = recordsTable.rows[editRecordRow].cells[1].innerHTML;
             document.getElementById("edit-record-unit").value = recordsTable.rows[editRecordRow].cells[2].innerHTML;
 
-            // From: Fri Mar 01 2024 17:57:00 GMT+0100 (czas środkowoeuropejski standardowy)
-            // To: YYYY - MM - DDTHH: mm
-
-
             let rawDate = new Date(recordsTable.rows[editRecordRow].cells[3].innerHTML);
             let convertedDate = convertToDatetimeLocal(rawDate);
-
             document.getElementById("edit-record-date").value = convertedDate;
 
         });
     }
 }
 
+// Converts the given date to the YYYY-MM-DDTHH:MM format.
 function convertToDatetimeLocal(dateToConvert) {
-    let convertedDate;
-
     let year = dateToConvert.getFullYear();
-    let month = dateToConvert.getMonth();
-    month++;
-    month = formatWithPrecedingZero(month);
-    let day = dateToConvert.getDate();
-    day = formatWithPrecedingZero(day);
-    let hour = dateToConvert.getHours();
-    hour = formatWithPrecedingZero(hour);
-    let minutes = dateToConvert.getMinutes();
-    minutes = formatWithPrecedingZero(minutes);
 
-    convertedDate = `${year}-${month}-${day}T${hour}:${minutes}`;
+    let month = dateToConvert.getMonth();
+    month++; // Account for zero-indexing
+    month = padWithZero(month);
+
+    let day = dateToConvert.getDate();
+    day = padWithZero(day);
+
+    let hour = dateToConvert.getHours();
+    hour = padWithZero(hour);
+
+    let minutes = dateToConvert.getMinutes();
+    minutes = padWithZero(minutes);
+
+    let convertedDate = `${year}-${month}-${day}T${hour}:${minutes}`;
 
     return convertedDate;
 }
 
-function formatWithPrecedingZero(itemToFormat) {
+// 
+function padWithZero(itemToFormat) {
     if (String(itemToFormat).length >= 2) {
         return itemToFormat;
     }
-
-   return `0${itemToFormat}`;
+    return `0${itemToFormat}`;
 }

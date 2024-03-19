@@ -6,7 +6,7 @@
 // -> Full responsiveness
 // -> Filled empty space on the right
 // -> Filled empty space in the navbar
-// -> Modal to edit existing habit
+// -> Modal to edit existing habit ✓
 // -> Credits page
 
 // Back-end:
