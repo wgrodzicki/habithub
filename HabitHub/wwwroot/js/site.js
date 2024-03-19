@@ -55,22 +55,69 @@ function getHabitFromDropdown() {
 }
 
 function populateModal() {
-    let viewRecordsTable = document.getElementById("table-view-records");
-    let rowIndex = 0;
-    let editRecordTable = document.getElementById("table-edit-record");
-    const editRecordButton = document.getElementsByClassName("edit-button");
+    //let viewRecordsTable = document.getElementById("table-view-records");
+    //let rowIndex = 0;
+    //let editRecordTable = document.getElementById("table-edit-record");
+    //const editRecordButton = document.getElementsByClassName("edit-button");
 
-    for (let i = 0; i < editRecordButton.length; i++) {
+    //for (let i = 0; i < editRecordButton.length; i++) {
 
-        editRecordButton[i].addEventListener("click", (event) => {
+    //    editRecordButton[i].addEventListener("click", (event) => {
 
-            rowIndex = event.target.id;
+    //        rowIndex = event.target.id;
 
-            //editRecordTable
+    //        //editRecordTable
+
+    //    });
+    //}
+
+    let recordsTable = document.getElementById("table-view-records");
+    const editButtons = recordsTable.getElementsByTagName("button");
+
+    for (let i = 0; i < editButtons.length; i++) {
+        editButtons[i].addEventListener("click", (event) => {
+
+            let editRecordRow = event.target.id;
+            document.getElementById("habit-dropdown-button").innerHTML = recordsTable.rows[editRecordRow].cells[0].innerHTML;
+            document.getElementById("edit-record-amount").value = recordsTable.rows[editRecordRow].cells[1].innerHTML;
+            document.getElementById("edit-record-unit").value = recordsTable.rows[editRecordRow].cells[2].innerHTML;
+
+            // From: Fri Mar 01 2024 17:57:00 GMT+0100 (czas środkowoeuropejski standardowy)
+            // To: YYYY - MM - DDTHH: mm
+
+
+            let rawDate = new Date(recordsTable.rows[editRecordRow].cells[3].innerHTML);
+            let convertedDate = convertToDatetimeLocal(rawDate);
+
+            document.getElementById("edit-record-date").value = convertedDate;
 
         });
     }
+}
 
+function convertToDatetimeLocal(dateToConvert) {
+    let convertedDate;
 
-    
+    let year = dateToConvert.getFullYear();
+    let month = dateToConvert.getMonth();
+    month++;
+    month = formatWithPrecedingZero(month);
+    let day = dateToConvert.getDate();
+    day = formatWithPrecedingZero(day);
+    let hour = dateToConvert.getHours();
+    hour = formatWithPrecedingZero(hour);
+    let minutes = dateToConvert.getMinutes();
+    minutes = formatWithPrecedingZero(minutes);
+
+    convertedDate = `${year}-${month}-${day}T${hour}:${minutes}`;
+
+    return convertedDate;
+}
+
+function formatWithPrecedingZero(itemToFormat) {
+    if (String(itemToFormat).length >= 2) {
+        return itemToFormat;
+    }
+
+   return `0${itemToFormat}`;
 }

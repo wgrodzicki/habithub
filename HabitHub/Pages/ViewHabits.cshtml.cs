@@ -16,7 +16,7 @@ namespace HabitHub.Pages
 		[BindProperty] public HabitRecordModel RecordToUpdate { get; set; }
 		[BindProperty] public int RecordToDelete { get; set; }
 		public List<string> SavedHabits { get; set; }
-		public int RecordsTableRowCounter { get; set; } = -1;
+		public int RecordsTableRowCounter { get; set; } = 0;
 
 		private readonly IConfiguration _configuration;
 
