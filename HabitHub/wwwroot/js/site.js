@@ -98,7 +98,7 @@ function convertToDatetimeLocal(dateToConvert) {
     return convertedDate;
 }
 
-// 
+// Pads the given string with a leading 0 if single-digit.
 function padWithZero(itemToFormat) {
     if (String(itemToFormat).length >= 2) {
         return itemToFormat;
