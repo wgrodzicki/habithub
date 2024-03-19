@@ -11,7 +11,12 @@ namespace HabitHub.Pages
 	{
 		[BindProperty] public List<HabitModel> Habits { get; set; }
 		[BindProperty] public List<HabitRecordModel> HabitRecords { get; set; }
+		[BindProperty] public int RecordToEdit { get; set; }
+		[BindProperty] public string HabitToUpdate { get; set; }
+		[BindProperty] public HabitRecordModel RecordToUpdate { get; set; }
 		[BindProperty] public int RecordToDelete { get; set; }
+		public List<string> SavedHabits { get; set; }
+		public int RecordsTableRowCounter { get; set; } = -1;
 
 		private readonly IConfiguration _configuration;
 
@@ -20,6 +25,7 @@ namespace HabitHub.Pages
 			_configuration = configuration;
 			Habits = new List<HabitModel>();
 			HabitRecords = new List<HabitRecordModel>();
+			SavedHabits = new List<string>();
 		}
 
 		public IActionResult OnGet()
@@ -29,9 +35,15 @@ namespace HabitHub.Pages
 				connection.Open();
 				HabitsRepository.GetHabits(connection, Habits);
 				HabitsRepository.GetHabitRecords(connection, HabitRecords);
+				HabitsRepository.GetHabitNames(connection, SavedHabits);
 			}
 			return Page();
 		}
+
+		//public IActionResult OnPostEdit()
+		//{
+		//	return OnGet();
+		//}
 
 		public IActionResult OnPostDelete()
 		{

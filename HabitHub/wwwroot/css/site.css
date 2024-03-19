@@ -39,12 +39,12 @@ main {
     padding-top: 24px;
 }
 
-#add-habit-button, #add-record-button {
+#add-habit-button, #add-record-button, #modal-save-button {
     background-color: #014000;
     border-color: #014000;
 }
 
-#add-habit-button:hover, #add-record-button:hover {
+#add-habit-button:hover, #add-record-button:hover, #modal-save-button:hover {
     background-color: #012e00;
     border-color: #012e00;
 }
@@ -79,4 +79,10 @@ main {
 .nav-item:hover {
     background-color: lightgray;
     color: black;
+}
+
+/* Edit modal */
+.modal-content {
+    background-color: #495057;
+    --modal-header-padding: 0px;
 }

@@ -7,10 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
     changeNavbarPillColor();
     cleanForms();
 
-    if (document.title == "Record habit - HabitHub" || document.title == "Add habit - HabitHub") {
+    if (document.title == "Record habit - HabitHub"
+        || document.title == "Add habit - HabitHub"
+        || document.title == "View habits - HabitHub") {
         getHabitFromDropdown();
     }
 
+    if (document.title == "View habits - HabitHub") {
+        populateModal();
+    }
 });
 
 // Changes navbar pill color on hover.
@@ -47,4 +52,25 @@ function getHabitFromDropdown() {
             document.getElementById("habit-input").value = event.target.innerHTML;
         });
     }
+}
+
+function populateModal() {
+    let viewRecordsTable = document.getElementById("table-view-records");
+    let rowIndex = 0;
+    let editRecordTable = document.getElementById("table-edit-record");
+    const editRecordButton = document.getElementsByClassName("edit-button");
+
+    for (let i = 0; i < editRecordButton.length; i++) {
+
+        editRecordButton[i].addEventListener("click", (event) => {
+
+            rowIndex = event.target.id;
+
+            //editRecordTable
+
+        });
+    }
+
+
+    
 }
