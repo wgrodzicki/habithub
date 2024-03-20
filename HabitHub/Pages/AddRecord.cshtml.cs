@@ -26,7 +26,7 @@ namespace HabitHub.Pages
 			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
 			{
 				connection.Open();
-                HabitsRepository.GetHabitNames(connection, SavedHabits);
+                HabitsRepository.GetAllHabitNames(connection, SavedHabits);
 			}
 			return Page();
 		}

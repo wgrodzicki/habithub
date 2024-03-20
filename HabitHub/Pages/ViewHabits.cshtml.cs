@@ -32,17 +32,26 @@ namespace HabitHub.Pages
 			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
 			{
 				connection.Open();
-				HabitsRepository.GetHabits(connection, Habits);
-				HabitsRepository.GetHabitRecords(connection, HabitRecords);
-				HabitsRepository.GetHabitNames(connection, SavedHabits);
+				HabitsRepository.GetAllHabits(connection, Habits);
+				HabitsRepository.GetAllHabitRecords(connection, HabitRecords);
+				HabitsRepository.GetAllHabitNames(connection, SavedHabits);
 			}
 			return Page();
 		}
 
-		//public IActionResult OnPostEdit()
-		//{
-		//	return OnGet();
-		//}
+		public IActionResult OnPostEdit()
+		{
+			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
+			{
+				connection.Open();
+				int habitIndex = HabitsRepository.GetHabitIndex(connection, HabitToUpdate);
+
+				// Make sure habit exists
+				if (habitIndex != -1)
+					HabitsRepository.UpdateRecord(connection, habitIndex, RecordToUpdate);
+			}
+			return OnGet();
+		}
 
 		public IActionResult OnPostDelete()
 		{

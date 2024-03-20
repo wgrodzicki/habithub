@@ -64,12 +64,14 @@ function populateModal() {
 
             let editRecordRow = event.target.id;
 
+            document.getElementById("edit-record-id").value = editButtons[i].value;
             document.getElementById("habit-dropdown-button").innerHTML = recordsTable.rows[editRecordRow].cells[0].innerHTML;
             document.getElementById("edit-record-amount").value = recordsTable.rows[editRecordRow].cells[1].innerHTML;
             document.getElementById("edit-record-unit").value = recordsTable.rows[editRecordRow].cells[2].innerHTML;
 
             let rawDate = new Date(recordsTable.rows[editRecordRow].cells[3].innerHTML);
             let convertedDate = convertToDatetimeLocal(rawDate);
+
             document.getElementById("edit-record-date").value = convertedDate;
 
         });

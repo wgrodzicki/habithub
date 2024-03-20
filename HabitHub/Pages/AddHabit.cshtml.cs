@@ -26,7 +26,7 @@ namespace HabitHub.Pages
 			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
 			{
 				connection.Open();
-				HabitsRepository.GetHabitNames(connection, SavedHabits);
+				HabitsRepository.GetAllHabitNames(connection, SavedHabits);
 			}
 			return Page();
 		}
@@ -46,7 +46,10 @@ namespace HabitHub.Pages
             using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
             {
 				connection.Open();
-				HabitsRepository.AddHabit(connection, Habit);
+
+				// Make sure habit doesn't exist yet
+				if (String.IsNullOrEmpty(HabitsRepository.CheckHabitExists(connection, Habit)))
+					HabitsRepository.AddHabit(connection, Habit);
 			}
 			return OnGet();
 		}
