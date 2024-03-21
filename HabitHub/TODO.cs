@@ -16,7 +16,8 @@
 // -> Delete habits: ✓
 //		-Add ON DELETE CASCADE to the 'habits' table ✓
 // -> Deleting recorded habits ✓
-// -> Editing (updating) existing habits (modal?)
+// -> Editing (updating) existing habits (modal?) ✓
+// -> Warning message when trying to add an existing habit ✓
 // -> Filtering recorded habits:
 //		-by habit
 //		-by date

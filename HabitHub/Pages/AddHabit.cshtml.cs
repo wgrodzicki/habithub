@@ -12,7 +12,8 @@ namespace HabitHub.Pages
         [BindProperty] public HabitModel Habit { get; set; }
 		[BindProperty] public string HabitToDelete { get; set; }
 		public List<string> SavedHabits { get; set; }
-		
+		public string HabitWarning { get; set; } = "";
+
 		private readonly IConfiguration _configuration;
 
         public AddHabitModel(IConfiguration configuration)
@@ -49,7 +50,14 @@ namespace HabitHub.Pages
 
 				// Make sure habit doesn't exist yet
 				if (String.IsNullOrEmpty(HabitsRepository.CheckHabitExists(connection, Habit)))
+				{
 					HabitsRepository.AddHabit(connection, Habit);
+					HabitWarning = "";
+				}
+				else
+				{
+					HabitWarning = "Habit already exists!";
+				}
 			}
 			return OnGet();
 		}

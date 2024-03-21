@@ -13,8 +13,8 @@
 				<label asp-for="Habit.HabitName" class="control-label">Habit name</label>
 				<input type="text" asp-for="Habit.HabitName" class="form-control" />
 				<span asp-validation-for="Habit.HabitName" class="text-danger"></span>
+				<label class="control-label" id="habit-warning">@Model.HabitWarning</label>
 			</div>
-			<br />
 			<div class="form-group">
 				<input type="submit" value="Add habit" class="btn btn-dark" id="add-habit-button" />
 			</div>

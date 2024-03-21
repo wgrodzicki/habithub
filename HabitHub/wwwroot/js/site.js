@@ -38,6 +38,12 @@ function cleanForms() {
     const forms = document.getElementsByClassName("form-control");
 
     for (let i = 0; i < forms.length; i++) {
+        // Don't clean the warning
+        if (document.title == "Add habit - HabitHub") {
+            if (document.getElementById("habit-warning").innerHTML != "") {
+                continue;
+            }
+        }
         forms[i].value = null;
     }
 }

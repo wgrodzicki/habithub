@@ -49,6 +49,10 @@ main {
     border-color: #012e00;
 }
 
+#habit-warning {
+    font-size: 12px;
+}
+
 #delete-habit-button, #delete-record-button {
     background-color: #6C2126;
     border-color: #6C2126;
