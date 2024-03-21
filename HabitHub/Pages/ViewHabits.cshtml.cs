@@ -14,6 +14,9 @@ namespace HabitHub.Pages
 		[BindProperty] public string HabitToUpdate { get; set; }
 		[BindProperty] public HabitRecordModel RecordToUpdate { get; set; }
 		[BindProperty] public int RecordToDelete { get; set; }
+		[BindProperty] public string HabitToFilterFor { get; set; }
+		[BindProperty] public DateTime StartDateToFilterFor { get; set; }
+		[BindProperty] public DateTime EndDateToFilterFor { get; set; }
 		public List<string> SavedHabits { get; set; }
 		public int RecordsTableRowCounter { get; set; } = 0;
 

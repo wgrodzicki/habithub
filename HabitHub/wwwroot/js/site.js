@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (document.title == "View habits - HabitHub") {
-        populateModal();
+        populateEditModal();
     }
 });
 
@@ -50,18 +50,43 @@ function cleanForms() {
 
 // Retrieves habit name from a dropdown menu.
 function getHabitFromDropdown() {
-    const dropdownItems = document.getElementsByClassName("dropdown-item");
+    if (document.title == "View habits - HabitHub") {
 
-    for (let i = 0; i < dropdownItems.length; i++) {
-        dropdownItems[i].addEventListener("click", (event) => {
-            document.getElementById("habit-dropdown-button").innerHTML = event.target.innerHTML;
-            document.getElementById("habit-input").value = event.target.innerHTML;
-        });
+        // Filter by habit dropdown
+        const dropdownItemsFilter = document.getElementById("habit-dropdown-filter").getElementsByClassName("dropdown-item");
+
+        for (let i = 0; i < dropdownItemsFilter.length; i++) {
+            dropdownItemsFilter[i].addEventListener("click", (event) => {
+                document.getElementById("habit-dropdown-button-filter").innerHTML = event.target.innerHTML;
+                document.getElementById("habit-input-filter").value = event.target.innerHTML;
+            });
+        }
+
+        // Modal habit dropdown
+        const dropdownItemsModal = document.getElementById("table-edit-record").getElementsByClassName("dropdown-item");
+
+        for (let i = 0; i < dropdownItemsModal.length; i++) {
+            dropdownItemsModal[i].addEventListener("click", (event) => {
+                document.getElementById("habit-dropdown-button").innerHTML = event.target.innerHTML;
+                document.getElementById("habit-input").value = event.target.innerHTML;
+            });
+        }
+    }
+    else {
+        // Regular habit dropdown
+        const dropdownItems = document.getElementsByClassName("dropdown-item");
+
+        for (let i = 0; i < dropdownItems.length; i++) {
+            dropdownItems[i].addEventListener("click", (event) => {
+                document.getElementById("habit-dropdown-button").innerHTML = event.target.innerHTML;
+                document.getElementById("habit-input").value = event.target.innerHTML;
+            });
+        }
     }
 }
 
-// Populates the modal with the currently selected record data.
-function populateModal() {
+// Populates the edit modal with the currently selected record data.
+function populateEditModal() {
     let recordsTable = document.getElementById("table-view-records");
     const editButtons = recordsTable.getElementsByTagName("button");
 

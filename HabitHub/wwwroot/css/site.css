@@ -25,7 +25,6 @@ main {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-
 #main-container {
     margin: 0 0 0 0;
     padding: 0 0 0 0;
@@ -35,7 +34,7 @@ main {
     max-width: 200px;
 }
 
-#habit-dropdown {
+#habit-dropdown, #habit-dropdown-filter {
     padding-top: 24px;
 }
 
@@ -63,6 +62,10 @@ main {
     border-color: #4f161a;
 }
 
+#filter-button, #sort-button {
+    margin-top: 49px;
+}
+
 /* Side navbar **/
 #navbar-column {
     font-size: 16px;
@@ -85,8 +88,11 @@ main {
     color: black;
 }
 
-/* Edit modal */
+/* Modals */
+.modal-header, .modal-footer {
+    border: none;
+}
+
 .modal-content {
     background-color: #495057;
-    --modal-header-padding: 0px;
 }
