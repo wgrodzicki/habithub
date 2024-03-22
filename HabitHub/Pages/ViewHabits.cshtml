@@ -80,18 +80,18 @@
 				<div class="modal-body">
 					<div class="row text-white">
 						<div class="col-md-4">
-								<div class="dropdown" id="habit-dropdown-filter">
-									<button class="btn btn-secondary dropdown-toggle" type="button" id="habit-dropdown-button-filter" data-bs-toggle="dropdown" aria-expanded="false">
-										Select habit
-									</button>
-									<ul class="dropdown-menu">
-										@foreach (string savedHabit in Model.SavedHabits)
-										{
-											<li><a class="dropdown-item">@savedHabit</a></li>
-										}
-									</ul>
-									<input type="hidden" asp-for="HabitToFilterBy" id="habit-input-filter" value="" />
-								</div>
+							<div class="dropdown" id="habit-dropdown-filter">
+								<button class="btn btn-secondary dropdown-toggle" type="button" id="habit-dropdown-button-filter" data-bs-toggle="dropdown" aria-expanded="false">
+									Select habit
+								</button>
+								<ul class="dropdown-menu">
+									@foreach (string savedHabit in Model.SavedHabits)
+									{
+										<li><a class="dropdown-item">@savedHabit</a></li>
+									}
+								</ul>
+								<input type="hidden" asp-for="HabitToFilterBy" id="habit-input-filter" value="" />
+							</div>
 						</div>
 						<div class="col-md-4">
 							From
@@ -105,13 +105,12 @@
 				</div>
 				<div class="modal-footer text-white">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<input type="submit" value="Filter" class="btn btn-secondary" id="modal-filter-button" />
+					<input type="submit" value="Apply" class="btn btn-secondary" id="modal-filter-button" />
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
-
 
 @* Main part *@
 <h3 class="text-white">My habits</h3>
@@ -157,14 +156,37 @@
 		</table>
 	</div>
 	<div class="col-md-1"></div>
-	<div class="col-md-1">
-		<button type="button" class="btn btn-secondary" id="filter-button" data-bs-toggle="modal" data-bs-target="#modal-filter">
-			Filter
-		</button>
-	</div>
-	<div class="col-md-1">
-		<button type="button" class="btn btn-secondary" id="sort-button" data-bs-toggle="modal" data-bs-target="#modal-sort">
-			Sort
-		</button>
+	<div class="col-md-2">
+		<br />
+		<br />
+		<div class="row">
+			<div class="d-grid gap-2">
+				<button type="button" class="btn btn-secondary" id="filter-button" data-bs-toggle="modal" data-bs-target="#modal-filter">
+					Filter
+				</button>
+				<a class="btn btn-secondary" asp-area="" asp-page="/ViewHabits">Revert</a>
+			</div>
+		</div>
+		<br />
+		<br />
+		<div class="row">
+			<form method="post" asp-page-handler="Sort">
+				<div class="dropdown" id="dropdown-sort">
+					<div class="d-grid gap-2">
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown-button-sort" data-bs-toggle="dropdown" aria-expanded="false">
+							Sort
+						</button>
+						<input type="hidden" asp-for="SortByHabit" id="input-sort-by-habit" value="" />
+						<input type="hidden" asp-for="SortByDate" id="input-sort-by-date" value="" />
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" id="dropdown-item-sort-by-habit">By habit</a></li>
+							<li><a class="dropdown-item" id="dropdown-item-sort-by-date">By date</a></li>
+						</ul>
+						<input type="submit" value="Apply" class="btn btn-secondary" id="sort-button" />
+						<a class="btn btn-secondary" id="sort-button-revert" asp-area="" asp-page="/ViewHabits">Revert</a>
+					</div>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>

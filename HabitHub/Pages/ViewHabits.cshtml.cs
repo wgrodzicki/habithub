@@ -19,6 +19,8 @@ namespace HabitHub.Pages
 		[BindProperty] public string HabitToFilterBy { get; set; }
 		[BindProperty] public DateTime StartDateToFilterBy { get; set; }
 		[BindProperty] public DateTime EndDateToFilterBy { get; set; }
+		[BindProperty] public bool SortByHabit { get; set; }
+		[BindProperty] public bool SortByDate { get; set; }
 		public List<string> SavedHabits { get; set; }
 		public int RecordsTableRowCounter { get; set; } = 0;
 
@@ -54,6 +56,16 @@ namespace HabitHub.Pages
 				// Make sure habit exists
 				if (habitIndex != -1)
 					HabitsRepository.UpdateRecord(connection, habitIndex, RecordToUpdate);
+			}
+			return OnGet();
+		}
+
+		public IActionResult OnPostDelete()
+		{
+			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
+			{
+				connection.Open();
+				HabitsRepository.DeleteRecord(connection, RecordToDelete);
 			}
 			return OnGet();
 		}
@@ -96,14 +108,23 @@ namespace HabitHub.Pages
 			return Page();
 		}
 
-		public IActionResult OnPostDelete()
+		public IActionResult OnPostSort()
 		{
 			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
 			{
 				connection.Open();
-				HabitsRepository.DeleteRecord(connection, RecordToDelete);
+				HabitsRepository.GetAllHabits(connection, Habits);
+				HabitsRepository.GetAllHabitRecords(connection, HabitRecords);
+				HabitsRepository.GetAllHabitNames(connection, SavedHabits);
 			}
-			return OnGet();
+
+			// Maybe alphabetically???
+			if (SortByHabit)
+				HabitRecords = HabitRecords.OrderBy(x => x.HabitsId).ToList();
+
+			// By date???
+
+			return Page();
 		}
 
 		/// <summary>

@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (document.title == "View habits - HabitHub") {
+        getSortingFromDropdown();
         populateEditModal();
     }
 });
@@ -48,7 +49,7 @@ function cleanForms() {
     }
 }
 
-// Retrieves habit name from a dropdown menu.
+// Retrieves habit name from the dropdown menu.
 function getHabitFromDropdown() {
     if (document.title == "View habits - HabitHub") {
 
@@ -83,6 +84,28 @@ function getHabitFromDropdown() {
             });
         }
     }
+}
+
+// Retrieves sorting mode from the dropdown menu.
+function getSortingFromDropdown() {
+
+    // Sort by habit
+    document.getElementById("dropdown-item-sort-by-habit").addEventListener("click", (event) => {
+        document.getElementById("dropdown-button-sort").innerHTML = event.target.innerHTML;
+        document.getElementById("sort-button-revert").style.display = "none";
+        document.getElementById("sort-button").style.display = "inline";
+        document.getElementById("input-sort-by-habit").value = true;
+        document.getElementById("input-sort-by-date").value = false;
+    });
+
+    // Sort by date
+    document.getElementById("dropdown-item-sort-by-date").addEventListener("click", (event) => {
+        document.getElementById("dropdown-button-sort").innerHTML = event.target.innerHTML;
+        document.getElementById("sort-button-revert").style.display = "none";
+        document.getElementById("sort-button").style.display = "inline";
+        document.getElementById("input-sort-by-date").value = true;
+        document.getElementById("input-sort-by-habit").value = false;
+    });
 }
 
 // Populates the edit modal with the currently selected record data.

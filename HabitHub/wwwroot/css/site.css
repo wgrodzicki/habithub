@@ -62,8 +62,8 @@ main {
     border-color: #4f161a;
 }
 
-#filter-button, #sort-button {
-    margin-top: 49px;
+#sort-button {
+    display: none;
 }
 
 /* Side navbar **/
