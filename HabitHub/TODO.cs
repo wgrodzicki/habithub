@@ -19,6 +19,9 @@
 // -> Editing (updating) existing habits (modal?) ✓
 // -> Warning message when trying to add an existing habit ✓
 // -> Filtering recorded habits:
+//		-by habit ✓
+//		-by date
+// -> Sorting recorded habits:
 //		-by habit
 //		-by date
 // -> Habit stats on home page (random?)

@@ -91,12 +91,12 @@ public static class HabitsRepository
 	}
 
 	/// <summary>
-	/// Returns the index of the habit based on its name, or -1 if no matching habit exists.
+	/// Returns the id of the habit based on its name, or -1 if no matching habit exists.
 	/// </summary>
 	/// <param name="connection"></param>
 	/// <param name="habitName"></param>
 	/// <returns></returns>
-	public static int GetHabitIndex(SqliteConnection connection, string habitName)
+	public static int GetHabitId(SqliteConnection connection, string habitName)
 	{
 		int habitIndex = -1;
 
@@ -176,19 +176,19 @@ public static class HabitsRepository
 		}
 		reader.Close();
 	}
-	
+
 	/// <summary>
 	/// Updates the record in the 'habit_records' table.
 	/// </summary>
 	/// <param name="connection"></param>
 	/// <param name="habitIndex"></param>
 	/// <param name="recordToUpdate"></param>
-	public static void UpdateRecord(SqliteConnection connection, int habitIndex, HabitRecordModel recordToUpdate)
+	public static void UpdateRecord(SqliteConnection connection, int habitId, HabitRecordModel recordToUpdate)
 	{
 		var tableCmd = connection.CreateCommand();
 		tableCmd.CommandText =
 			$@"UPDATE habit_records
-			   SET habits_id = {habitIndex}, amount = {recordToUpdate.Amount}, unit = '{recordToUpdate.Unit}', date = '{recordToUpdate.Date}'
+			   SET habits_id = {habitId}, amount = {recordToUpdate.Amount}, unit = '{recordToUpdate.Unit}', date = '{recordToUpdate.Date}'
 			   WHERE id = {recordToUpdate.Id}";
 		tableCmd.ExecuteNonQuery();
 	}

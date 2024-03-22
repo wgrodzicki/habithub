@@ -1,6 +1,7 @@
 using HabitHub.Data;
 using HabitHub.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.Sqlite;
 
@@ -47,12 +48,54 @@ namespace HabitHub.Pages
 			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
 			{
 				connection.Open();
-				int habitIndex = HabitsRepository.GetHabitIndex(connection, HabitToUpdate);
+				int habitIndex = HabitsRepository.GetHabitId(connection, HabitToUpdate);
 
 				// Make sure habit exists
 				if (habitIndex != -1)
 					HabitsRepository.UpdateRecord(connection, habitIndex, RecordToUpdate);
 			}
+			return OnGet();
+		}
+
+		public IActionResult OnPostFilter()
+		{
+			if (String.IsNullOrEmpty(HabitToFilterFor) && (StartDateToFilterFor.Year == 1 || EndDateToFilterFor.Year == 1))
+			{
+				return OnGet();
+			}
+
+			if (!String.IsNullOrEmpty(HabitToFilterFor))
+			{
+				using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
+				{
+					connection.Open();
+					HabitsRepository.GetAllHabits(connection, Habits);
+					HabitsRepository.GetAllHabitRecords(connection, HabitRecords);
+					HabitsRepository.GetAllHabitNames(connection, SavedHabits);
+
+					int habitId = HabitsRepository.GetHabitId(connection, HabitToFilterFor);
+					HabitRecords = HabitRecords.Where(x => x.HabitsId == habitId).ToList();
+
+					if (StartDateToFilterFor.Year != 1 && EndDateToFilterFor.Year != 1)
+					{
+
+					}
+				}
+				return Page();
+			}
+
+			if (StartDateToFilterFor.Year != 1 && EndDateToFilterFor.Year != 1)
+			{
+				using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
+				{
+					connection.Open();
+					HabitsRepository.GetAllHabits(connection, Habits);
+
+					HabitsRepository.GetAllHabitNames(connection, SavedHabits);
+				}
+				return Page();
+			}
+
 			return OnGet();
 		}
 

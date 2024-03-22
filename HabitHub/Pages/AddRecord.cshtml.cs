@@ -41,9 +41,6 @@ namespace HabitHub.Pages
 				connection.Open();
 				HabitsRepository.AddHabitRecord(connection, HabitToRecord, HabitRecord);
 			}
-
-			
-
 			return OnGet();
 		}
 	}
