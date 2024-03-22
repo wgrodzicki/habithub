@@ -61,7 +61,7 @@ namespace HabitHub.Pages
 		public IActionResult OnPostFilter()
 		{
 			// Make sure any criteria were chosen
-			if (String.IsNullOrEmpty(HabitToFilterBy) && (StartDateToFilterBy.Year == 1 || EndDateToFilterBy.Year == 1))
+			if (String.IsNullOrEmpty(HabitToFilterBy) && StartDateToFilterBy.Year == 1 && EndDateToFilterBy.Year == 1)
 			{
 				return OnGet();
 			}
@@ -81,11 +81,16 @@ namespace HabitHub.Pages
 					HabitRecords = HabitRecords.Where(x => x.HabitsId == habitId).ToList();
 				}
 
-				// Filter by date
-				if (StartDateToFilterBy.Year != 1 && EndDateToFilterBy.Year != 1)
+				// Filter by starting date (inclusive)
+				if (StartDateToFilterBy.Year != 1)
 				{
-					HabitRecords = HabitRecords.Where(x => x.Date.CompareTo(StartDateToFilterBy) >= 0
-															&& x.Date.CompareTo(EndDateToFilterBy) <= 0).ToList();
+					HabitRecords = HabitRecords.Where(x => x.Date.CompareTo(StartDateToFilterBy) >= 0).ToList();
+				}
+
+				// Filter by ending date (inclusive)
+				if (EndDateToFilterBy.Year != 1)
+				{
+					HabitRecords = HabitRecords.Where(x => x.Date.CompareTo(EndDateToFilterBy) <= 0).ToList();
 				}
 			}
 			return Page();
