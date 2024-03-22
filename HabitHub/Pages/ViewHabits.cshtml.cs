@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.Sqlite;
+using System.Linq;
 
 namespace HabitHub.Pages
 {
@@ -15,9 +16,9 @@ namespace HabitHub.Pages
 		[BindProperty] public string HabitToUpdate { get; set; }
 		[BindProperty] public HabitRecordModel RecordToUpdate { get; set; }
 		[BindProperty] public int RecordToDelete { get; set; }
-		[BindProperty] public string HabitToFilterFor { get; set; }
-		[BindProperty] public DateTime StartDateToFilterFor { get; set; }
-		[BindProperty] public DateTime EndDateToFilterFor { get; set; }
+		[BindProperty] public string HabitToFilterBy { get; set; }
+		[BindProperty] public DateTime StartDateToFilterBy { get; set; }
+		[BindProperty] public DateTime EndDateToFilterBy { get; set; }
 		public List<string> SavedHabits { get; set; }
 		public int RecordsTableRowCounter { get; set; } = 0;
 
@@ -59,44 +60,35 @@ namespace HabitHub.Pages
 
 		public IActionResult OnPostFilter()
 		{
-			if (String.IsNullOrEmpty(HabitToFilterFor) && (StartDateToFilterFor.Year == 1 || EndDateToFilterFor.Year == 1))
+			// Make sure any criteria were chosen
+			if (String.IsNullOrEmpty(HabitToFilterBy) && (StartDateToFilterBy.Year == 1 || EndDateToFilterBy.Year == 1))
 			{
 				return OnGet();
 			}
 
-			if (!String.IsNullOrEmpty(HabitToFilterFor))
+			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
 			{
-				using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
-				{
-					connection.Open();
-					HabitsRepository.GetAllHabits(connection, Habits);
-					HabitsRepository.GetAllHabitRecords(connection, HabitRecords);
-					HabitsRepository.GetAllHabitNames(connection, SavedHabits);
+				connection.Open();
 
-					int habitId = HabitsRepository.GetHabitId(connection, HabitToFilterFor);
+				HabitsRepository.GetAllHabits(connection, Habits);
+				HabitsRepository.GetAllHabitRecords(connection, HabitRecords);
+				HabitsRepository.GetAllHabitNames(connection, SavedHabits);
+
+				// Filter by habit
+				if (!String.IsNullOrEmpty(HabitToFilterBy))
+				{
+					int habitId = HabitsRepository.GetHabitId(connection, HabitToFilterBy);
 					HabitRecords = HabitRecords.Where(x => x.HabitsId == habitId).ToList();
-
-					if (StartDateToFilterFor.Year != 1 && EndDateToFilterFor.Year != 1)
-					{
-
-					}
 				}
-				return Page();
-			}
 
-			if (StartDateToFilterFor.Year != 1 && EndDateToFilterFor.Year != 1)
-			{
-				using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
+				// Filter by date
+				if (StartDateToFilterBy.Year != 1 && EndDateToFilterBy.Year != 1)
 				{
-					connection.Open();
-					HabitsRepository.GetAllHabits(connection, Habits);
-
-					HabitsRepository.GetAllHabitNames(connection, SavedHabits);
+					HabitRecords = HabitRecords.Where(x => x.Date.CompareTo(StartDateToFilterBy) >= 0
+															&& x.Date.CompareTo(EndDateToFilterBy) <= 0).ToList();
 				}
-				return Page();
 			}
-
-			return OnGet();
+			return Page();
 		}
 
 		public IActionResult OnPostDelete()

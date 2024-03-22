@@ -20,7 +20,7 @@
 // -> Warning message when trying to add an existing habit ✓
 // -> Filtering recorded habits:
 //		-by habit ✓
-//		-by date
+//		-by date ✓
 // -> Sorting recorded habits:
 //		-by habit
 //		-by date
