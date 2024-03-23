@@ -7,7 +7,6 @@
 // -> Filled empty space on the right
 // -> Filled empty space in the navbar
 // -> Modal to edit existing habit ✓
-// -> Credits page
 
 // Back-end:
 // -> Adding new habits ✓
@@ -21,15 +20,18 @@
 // -> Filtering recorded habits: ✓
 //		-by habit ✓
 //		-by date ✓
-// -> Sorting recorded habits:
+// -> Ordering recorded habits: ✓
 //		-by habit ✓
-//		-by date
+//		-by date ✓
+// -> Sorting ordered habits:
+//		-ascending
+//		-descending
 // -> Habit stats on home page (random?)
 
 // Nice-to-have:
 // -> User account
 // -> Authentication
 // -> Password hashing
-// -> Add habit location (geolocation API: https://www.abstractapi.com/api/ip-geolocation-api)
 // -> Export/import habits to/from Excel
 // -> Unit tests
+// -> Credits page

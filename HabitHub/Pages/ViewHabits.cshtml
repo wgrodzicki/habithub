@@ -155,7 +155,8 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="col-md-1"></div>
+	<div class="col-md-1">
+	</div>
 	<div class="col-md-2">
 		<br />
 		<br />
@@ -170,23 +171,48 @@
 		<br />
 		<br />
 		<div class="row">
-			<form method="post" asp-page-handler="Sort">
-				<div class="dropdown" id="dropdown-sort">
-					<div class="d-grid gap-2">
-						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown-button-sort" data-bs-toggle="dropdown" aria-expanded="false">
-							Sort
-						</button>
-						<input type="hidden" asp-for="SortByHabit" id="input-sort-by-habit" value="" />
-						<input type="hidden" asp-for="SortByDate" id="input-sort-by-date" value="" />
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" id="dropdown-item-sort-by-habit">By habit</a></li>
-							<li><a class="dropdown-item" id="dropdown-item-sort-by-date">By date</a></li>
-						</ul>
-						<input type="submit" value="Apply" class="btn btn-secondary" id="sort-button" />
-						<a class="btn btn-secondary" id="sort-button-revert" asp-area="" asp-page="/ViewHabits">Revert</a>
-					</div>
+			<div class="dropdown" id="dropdown-order">
+				<div class="d-grid gap-2">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown-button-order" data-bs-toggle="dropdown" aria-expanded="false">
+						Order by
+					</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" id="dropdown-item-order-by-habit">Habit</a></li>
+						<li><a class="dropdown-item" id="dropdown-item-order-by-date">Date</a></li>
+					</ul>
+					@if (Model.OrderingApplied)
+					{
+						<form method="post" asp-page-handler="Sort">
+							<div class="row" id="order-asc-desc-buttons">
+								<div class="col-6">
+									<div class="d-grid">
+										<input type="button" value="↑" class="btn btn-secondary btn-sm" id="order-asc-button" />
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="d-grid">
+										<input type="button" value="↓" class="btn btn-secondary btn-sm" id="order-desc-button" />
+									</div>
+								</div>
+							</div>
+							@* FINISH SORTING BY SUBMITTING THIS FORM!!! *@
+							<input type="hidden" asp-for="SortAscending" id="input-sort-mode" value="" />
+						</form>
+					}
+					<form method="post" asp-page-handler="Order" id="order-form">
+						<input type="hidden" asp-for="OrderByHabit" id="input-order-by-habit" value="" />
+						<input type="hidden" asp-for="OrderByDate" id="input-order-by-date" value="" />
+						<div class="row">
+							<div class="col-12">
+								<div class="d-grid">
+									<input type="submit" value="Apply" class="btn btn-secondary" id="order-button" />
+								</div>
+							</div>
+						</div>
+					</form>
+					<a class="btn btn-secondary" id="order-button-revert" asp-area="" asp-page="/ViewHabits">Revert</a>
 				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 </div>

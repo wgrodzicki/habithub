@@ -19,10 +19,13 @@ namespace HabitHub.Pages
 		[BindProperty] public string HabitToFilterBy { get; set; }
 		[BindProperty] public DateTime StartDateToFilterBy { get; set; }
 		[BindProperty] public DateTime EndDateToFilterBy { get; set; }
-		[BindProperty] public bool SortByHabit { get; set; }
-		[BindProperty] public bool SortByDate { get; set; }
+		[BindProperty] public bool OrderByHabit { get; set; }
+		[BindProperty] public bool OrderByDate { get; set; }
+		[BindProperty] public bool SortAscending { get; set; }
+
 		public List<string> SavedHabits { get; set; }
 		public int RecordsTableRowCounter { get; set; } = 0;
+		public bool OrderingApplied { get; set; } = false;
 
 		private readonly IConfiguration _configuration;
 
@@ -108,7 +111,7 @@ namespace HabitHub.Pages
 			return Page();
 		}
 
-		public IActionResult OnPostSort()
+		public IActionResult OnPostOrder()
 		{
 			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
 			{
@@ -118,11 +121,16 @@ namespace HabitHub.Pages
 				HabitsRepository.GetAllHabitNames(connection, SavedHabits);
 			}
 
-			// Maybe alphabetically???
-			if (SortByHabit)
+			// Order by habit (in order of addition)
+			if (OrderByHabit)
 				HabitRecords = HabitRecords.OrderBy(x => x.HabitsId).ToList();
+				
 
-			// By date???
+			// Order by date
+			if (OrderByDate)
+				HabitRecords = HabitRecords.OrderBy(x => x.Date).ToList();
+
+			OrderingApplied = true;
 
 			return Page();
 		}

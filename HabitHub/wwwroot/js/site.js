@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (document.title == "View habits - HabitHub") {
-        getSortingFromDropdown();
         populateEditModal();
+        getOrderFromDropdown();
     }
 });
 
@@ -86,28 +86,6 @@ function getHabitFromDropdown() {
     }
 }
 
-// Retrieves sorting mode from the dropdown menu.
-function getSortingFromDropdown() {
-
-    // Sort by habit
-    document.getElementById("dropdown-item-sort-by-habit").addEventListener("click", (event) => {
-        document.getElementById("dropdown-button-sort").innerHTML = event.target.innerHTML;
-        document.getElementById("sort-button-revert").style.display = "none";
-        document.getElementById("sort-button").style.display = "inline";
-        document.getElementById("input-sort-by-habit").value = true;
-        document.getElementById("input-sort-by-date").value = false;
-    });
-
-    // Sort by date
-    document.getElementById("dropdown-item-sort-by-date").addEventListener("click", (event) => {
-        document.getElementById("dropdown-button-sort").innerHTML = event.target.innerHTML;
-        document.getElementById("sort-button-revert").style.display = "none";
-        document.getElementById("sort-button").style.display = "inline";
-        document.getElementById("input-sort-by-date").value = true;
-        document.getElementById("input-sort-by-habit").value = false;
-    });
-}
-
 // Populates the edit modal with the currently selected record data.
 function populateEditModal() {
     let recordsTable = document.getElementById("table-view-records");
@@ -161,3 +139,34 @@ function padWithZero(itemToFormat) {
     }
     return `0${itemToFormat}`;
 }
+
+// Retrieves ordering mode from the dropdown menu.
+function getOrderFromDropdown() {
+
+    // Order by habit
+    document.getElementById("dropdown-item-order-by-habit").addEventListener("click", (event) => {
+        document.getElementById("dropdown-button-order").innerHTML = event.target.innerHTML;
+        document.getElementById("order-button-revert").style.display = "none";
+        document.getElementById("order-form").style.display = "inline";
+        document.getElementById("input-order-by-habit").value = true;
+        document.getElementById("input-order-by-date").value = false;
+
+        if (document.getElementById("order-asc-desc-buttons") != null) {
+            document.getElementById("order-asc-desc-buttons").style.display = "none";
+        }
+    });
+
+    // Order by date
+    document.getElementById("dropdown-item-order-by-date").addEventListener("click", (event) => {
+        document.getElementById("dropdown-button-order").innerHTML = event.target.innerHTML;
+        document.getElementById("order-button-revert").style.display = "none";
+        document.getElementById("order-form").style.display = "inline";
+        document.getElementById("input-order-by-date").value = true;
+        document.getElementById("input-order-by-habit").value = false;
+
+        if (document.getElementById("order-asc-desc-buttons") != null) {
+            document.getElementById("order-asc-desc-buttons").style.display = "none";
+        }
+    });
+}
+
