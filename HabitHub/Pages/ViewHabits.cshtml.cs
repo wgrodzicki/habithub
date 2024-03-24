@@ -111,29 +111,29 @@ namespace HabitHub.Pages
 			return Page();
 		}
 
-		public IActionResult OnPostOrder()
-		{
-			using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
-			{
-				connection.Open();
-				HabitsRepository.GetAllHabits(connection, Habits);
-				HabitsRepository.GetAllHabitRecords(connection, HabitRecords);
-				HabitsRepository.GetAllHabitNames(connection, SavedHabits);
-			}
+		//public IActionResult OnPostOrder()
+		//{
+		//	using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
+		//	{
+		//		connection.Open();
+		//		HabitsRepository.GetAllHabits(connection, Habits);
+		//		HabitsRepository.GetAllHabitRecords(connection, HabitRecords);
+		//		HabitsRepository.GetAllHabitNames(connection, SavedHabits);
+		//	}
 
-			// Order by habit (in order of addition)
-			if (OrderByHabit)
-				HabitRecords = HabitRecords.OrderBy(x => x.HabitsId).ToList();
+		//	// Order by habit (in order of addition)
+		//	if (OrderByHabit)
+		//		HabitRecords = HabitRecords.OrderBy(x => x.HabitsId).ToList();
 				
 
-			// Order by date
-			if (OrderByDate)
-				HabitRecords = HabitRecords.OrderBy(x => x.Date).ToList();
+		//	// Order by date
+		//	if (OrderByDate)
+		//		HabitRecords = HabitRecords.OrderBy(x => x.Date).ToList();
 
-			OrderingApplied = true;
+		//	OrderingApplied = true;
 
-			return Page();
-		}
+		//	return Page();
+		//}
 
 		/// <summary>
 		/// Returns the name of the habit corresponding to the record given.

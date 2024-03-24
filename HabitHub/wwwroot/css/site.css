@@ -62,7 +62,7 @@ main {
     border-color: #4f161a;
 }
 
-#order-form {
+#order-apply-button, #order-asc-desc-buttons {
     display: none;
 }
 

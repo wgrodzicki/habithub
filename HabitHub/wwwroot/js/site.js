@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (document.title == "View habits - HabitHub") {
         populateEditModal();
         getOrderFromDropdown();
+        orderRecords();
     }
 });
 
@@ -147,7 +148,7 @@ function getOrderFromDropdown() {
     document.getElementById("dropdown-item-order-by-habit").addEventListener("click", (event) => {
         document.getElementById("dropdown-button-order").innerHTML = event.target.innerHTML;
         document.getElementById("order-button-revert").style.display = "none";
-        document.getElementById("order-form").style.display = "inline";
+        document.getElementById("order-apply-button").style.display = "inline";
         document.getElementById("input-order-by-habit").value = true;
         document.getElementById("input-order-by-date").value = false;
 
@@ -160,7 +161,7 @@ function getOrderFromDropdown() {
     document.getElementById("dropdown-item-order-by-date").addEventListener("click", (event) => {
         document.getElementById("dropdown-button-order").innerHTML = event.target.innerHTML;
         document.getElementById("order-button-revert").style.display = "none";
-        document.getElementById("order-form").style.display = "inline";
+        document.getElementById("order-apply-button").style.display = "inline";
         document.getElementById("input-order-by-date").value = true;
         document.getElementById("input-order-by-habit").value = false;
 
@@ -168,5 +169,17 @@ function getOrderFromDropdown() {
             document.getElementById("order-asc-desc-buttons").style.display = "none";
         }
     });
+}
+
+// TODO!!
+function orderRecords() {
+    document.getElementById("order-apply-button").addEventListener("click", (event) => {
+        document.getElementById("order-apply-button").style.display = "none";
+        document.getElementById("order-asc-desc-buttons").style.display = "inline";
+        document.getElementById("order-button-revert").style.display = "inline";
+    });
+
+    let recordsTableRows = document.getElementById("table-view-records").rows;
+    
 }
 

@@ -156,6 +156,16 @@
 		</table>
 	</div>
 	<div class="col-md-1">
+		<br />
+		<div class="row" id="order-asc-desc-buttons">
+			<div class="col-6">
+				<input type="button" value="↑" class="btn btn-secondary btn-sm" id="order-asc-button" />
+			</div>
+			<br />
+			<div class="col-6">
+				<input type="button" value="↓" class="btn btn-secondary btn-sm" id="order-desc-button" />
+			</div>
+		</div>
 	</div>
 	<div class="col-md-2">
 		<br />
@@ -180,36 +190,14 @@
 						<li><a class="dropdown-item" id="dropdown-item-order-by-habit">Habit</a></li>
 						<li><a class="dropdown-item" id="dropdown-item-order-by-date">Date</a></li>
 					</ul>
-					@if (Model.OrderingApplied)
-					{
-						<form method="post" asp-page-handler="Sort">
-							<div class="row" id="order-asc-desc-buttons">
-								<div class="col-6">
-									<div class="d-grid">
-										<input type="button" value="↑" class="btn btn-secondary btn-sm" id="order-asc-button" />
-									</div>
-								</div>
-								<div class="col-6">
-									<div class="d-grid">
-										<input type="button" value="↓" class="btn btn-secondary btn-sm" id="order-desc-button" />
-									</div>
-								</div>
-							</div>
-							@* FINISH SORTING BY SUBMITTING THIS FORM!!! *@
-							<input type="hidden" asp-for="SortAscending" id="input-sort-mode" value="" />
-						</form>
-					}
-					<form method="post" asp-page-handler="Order" id="order-form">
-						<input type="hidden" asp-for="OrderByHabit" id="input-order-by-habit" value="" />
-						<input type="hidden" asp-for="OrderByDate" id="input-order-by-date" value="" />
-						<div class="row">
-							<div class="col-12">
-								<div class="d-grid">
-									<input type="submit" value="Apply" class="btn btn-secondary" id="order-button" />
-								</div>
+					
+					<div class="row" id="order-apply-button">
+						<div class="col-12">
+							<div class="d-grid">
+								<input type="submit" value="Apply" class="btn btn-secondary" id="order-button" />
 							</div>
 						</div>
-					</form>
+					</div>
 					<a class="btn btn-secondary" id="order-button-revert" asp-area="" asp-page="/ViewHabits">Revert</a>
 				</div>
 			</div>
