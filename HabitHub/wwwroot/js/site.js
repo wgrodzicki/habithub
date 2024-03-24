@@ -180,6 +180,14 @@ function orderRecords() {
     });
 
     let recordsTableRows = document.getElementById("table-view-records").rows;
-    
+    let habitNames = [];
+
+    for (let i = 0; i < recordsTableRows.length; i++) {
+        habitNames[i] = recordsTableRows[i].cells[0];
+    }
+
+    habitNames = habitNames.sort();
+
+
 }
 
