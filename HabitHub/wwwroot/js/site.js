@@ -3,6 +3,11 @@
 
 // Write your JavaScript code.
 
+let orderByHabit = false;
+let orderByDate = false;
+let isOrderedAsc = false;
+let sortingDisplayed = false;
+
 document.addEventListener("DOMContentLoaded", () => {
     changeNavbarPillColor();
     cleanForms();
@@ -16,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (document.title == "View habits - HabitHub") {
         populateEditModal();
         getOrderFromDropdown();
-        orderRecords();
     }
 });
 
@@ -149,12 +153,14 @@ function getOrderFromDropdown() {
         document.getElementById("dropdown-button-order").innerHTML = event.target.innerHTML;
         document.getElementById("order-button-revert").style.display = "none";
         document.getElementById("order-apply-button").style.display = "inline";
-        document.getElementById("input-order-by-habit").value = true;
-        document.getElementById("input-order-by-date").value = false;
 
         if (document.getElementById("order-asc-desc-buttons") != null) {
             document.getElementById("order-asc-desc-buttons").style.display = "none";
         }
+
+        orderByHabit = true;
+        orderByDate = false;
+        listenForOrdering();
     });
 
     // Order by date
@@ -162,32 +168,134 @@ function getOrderFromDropdown() {
         document.getElementById("dropdown-button-order").innerHTML = event.target.innerHTML;
         document.getElementById("order-button-revert").style.display = "none";
         document.getElementById("order-apply-button").style.display = "inline";
-        document.getElementById("input-order-by-date").value = true;
-        document.getElementById("input-order-by-habit").value = false;
 
         if (document.getElementById("order-asc-desc-buttons") != null) {
             document.getElementById("order-asc-desc-buttons").style.display = "none";
         }
+
+        orderByDate = true;
+        orderByHabit = false;
+        listenForOrdering();
     });
 }
 
-// TODO!!
-function orderRecords() {
+// Listens for applying the selected ordering mode.
+function listenForOrdering() {
     document.getElementById("order-apply-button").addEventListener("click", (event) => {
         document.getElementById("order-apply-button").style.display = "none";
         document.getElementById("order-asc-desc-buttons").style.display = "inline";
         document.getElementById("order-button-revert").style.display = "inline";
+        orderRecords(true);
     });
-
-    let recordsTableRows = document.getElementById("table-view-records").rows;
-    let habitNames = [];
-
-    for (let i = 0; i < recordsTableRows.length; i++) {
-        habitNames[i] = recordsTableRows[i].cells[0];
-    }
-
-    habitNames = habitNames.sort();
-
-
 }
 
+// Orders records in the habits table depending on the mode selected.
+function orderRecords(orderAsc) {
+    let recordsTableRows = document.getElementById("table-view-records").rows;
+    let indexAndHabit = new Map();
+
+    // Order by habit
+    if (orderByHabit) {
+        indexAndHabit = getOrderByHabit(indexAndHabit, recordsTableRows, orderAsc);
+    // Order by date
+    } else if (orderByDate) {
+        indexAndHabit = getOrderByDate(indexAndHabit, recordsTableRows, orderAsc);
+    }
+    else {
+        isOrderedAsc = false;
+        orderByHabit = false;
+        orderByDate = false;
+        return;
+    }
+
+    let tmpTableRows = [];
+
+    // Populate the temporary "rows" with the data from the table
+    for (let i = 1; i < recordsTableRows.length; i++) {
+
+        tmpTableRows[i] = [];
+        tmpTableRows[i][0] = recordsTableRows[i].cells[0].innerHTML;
+        tmpTableRows[i][1] = recordsTableRows[i].cells[1].innerHTML;
+        tmpTableRows[i][2] = recordsTableRows[i].cells[2].innerHTML;
+        tmpTableRows[i][3] = recordsTableRows[i].cells[3].innerHTML;
+    }
+
+    // Populate the table with the data from the temporary "rows" according to the new order
+    for (let i = 1; i < tmpTableRows.length; i++) {
+        recordsTableRows[i].cells[0].innerHTML = tmpTableRows[indexAndHabit[i - 1][0]][0];
+        recordsTableRows[i].cells[1].innerHTML = tmpTableRows[indexAndHabit[i - 1][0]][1];
+        recordsTableRows[i].cells[2].innerHTML = tmpTableRows[indexAndHabit[i - 1][0]][2];
+        recordsTableRows[i].cells[3].innerHTML = tmpTableRows[indexAndHabit[i - 1][0]][3];
+    }
+
+    listenForSorting();
+}
+
+// Handles ordering records in the habits table by habit.
+function getOrderByHabit(indexAndHabit, recordsTableRows, orderAsc) {
+    for (let i = 0; i < recordsTableRows.length; i++) {
+        // Bypass the 1st row (table header)
+        if (i == 0) {
+            continue;
+        }
+        // Save the habit (value) from each row paired with its current index (key)
+        indexAndHabit.set(i, recordsTableRows[i].cells[0].innerHTML);
+    }
+
+    // Sort in ascending order by habit (value)
+    // Proper comparison method from: https://www.basedash.com/blog/how-to-sort-a-map-in-javascript
+    indexAndHabit = Array.from(indexAndHabit).sort((a, b) => a[1].localeCompare(b[1]));
+
+    if (orderAsc) {
+        isOrderedAsc = true;
+        return indexAndHabit;
+    }
+    else {
+        isOrderedAsc = false;
+        // Reverse if the order should be descending
+        return indexAndHabit.reverse();
+    }
+}
+
+// Handles ordering records in the habits table by date.
+function getOrderByDate(indexAndHabit, recordsTableRows, orderAsc) {
+    for (let i = 0; i < recordsTableRows.length; i++) {
+        // Bypass the 1st row (table header)
+        if (i == 0) {
+            continue;
+        }
+        // Save the date (value) from each row paired with its current index (key)
+        indexAndHabit.set(i, Date.parse(recordsTableRows[i].cells[3].innerHTML));
+    }
+
+    // Sort in ascending order by date (value)
+    indexAndHabit = Array.from(indexAndHabit).sort((a, b) => a[1] - b[1]);
+
+    if (orderAsc) {
+        isOrderedAsc = true;
+        return indexAndHabit;
+    }
+    else {
+        isOrderedAsc = false;
+        // Reverse if the order should be descending
+        return indexAndHabit.reverse();
+    }
+}
+
+// Listens for additional sorting after ordering the records in the habits table.
+function listenForSorting() {
+    if (sortingDisplayed) {
+        return;
+    }
+
+    document.getElementById("order-asc-button").addEventListener("click", (event) => {
+        orderRecords(true);
+    });
+
+    document.getElementById("order-desc-button").addEventListener("click", (event) => {
+        orderRecords(false);
+    });
+
+    // Make sure the listening is applied only once
+    sortingDisplayed = true;
+}

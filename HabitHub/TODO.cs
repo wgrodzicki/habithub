@@ -23,9 +23,9 @@
 // -> Ordering recorded habits: ✓
 //		-by habit ✓
 //		-by date ✓
-// -> Sorting ordered habits:
-//		-ascending
-//		-descending
+// -> Sorting ordered habits: ✓
+//		-ascending ✓
+//		-descending ✓
 // -> Habit stats on home page (random?)
 
 // Nice-to-have:
