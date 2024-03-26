@@ -62,8 +62,17 @@ main {
     border-color: #4f161a;
 }
 
+#filter-button, #filter-button-revert, #dropdown-order {
+    margin-bottom: 20px;
+}
+
 #order-apply-button, #order-asc-desc-buttons {
     display: none;
+}
+
+#table-container {
+    max-height: 60vh;
+    overflow-y: scroll;
 }
 
 /* Side navbar **/
@@ -71,16 +80,28 @@ main {
     font-size: 16px;
     display: flex;
     flex-wrap: nowrap;
+
+    
+
     height: 100vh;
     max-height: 100vh;
     overflow-x: auto;
     overflow-y: hidden;
 }
 
+#navbar {
+    width: 300px;
+}
+
 .bi {
     vertical-align: -.125em;
     pointer-events: none;
     fill: currentColor;
+}
+
+.nav-item {
+    font-size: 18px;
+    padding: 10px;
 }
 
 .nav-item:hover {

@@ -4,7 +4,6 @@
 	ViewData["Title"] = "View habits";
 }
 
-
 @* Edit modal *@
 <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="edit-modal-label" aria-hidden="true">
 	<div class="modal-dialog modal-lg modal-dialog-centered">
@@ -67,7 +66,6 @@
 	</div>
 </div>
 
-
 @* Filter modal *@
 <div class="modal fade" id="modal-filter" tabindex="-1" aria-labelledby="filter-modal-label" aria-hidden="true">
 	<div class="modal-dialog modal-md modal-dialog-centered">
@@ -112,12 +110,44 @@
 	</div>
 </div>
 
-@* Main part *@
+@* Upper options *@
 <h3 class="text-white">My habits</h3>
 <hr class="text-white" />
 <div class="row text-white">
-	<div class="col-md-8">
-		<table class="table text-white" id="table-view-records">
+	<div class="col-md-6">
+
+		<button type="button" class="btn btn-secondary" id="filter-button" data-bs-toggle="modal" data-bs-target="#modal-filter">
+			Filter
+		</button>
+		<a class="btn btn-secondary" id="filter-button-revert" asp-area="" asp-page="/ViewHabits">Revert</a>
+	</div>
+	<div class="col-md-6">
+
+		<div class="dropdown" id="dropdown-order">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown-button-order" data-bs-toggle="dropdown" aria-expanded="false">
+				Order by
+			</button>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item" id="dropdown-item-order-by-habit">Habit</a></li>
+				<li><a class="dropdown-item" id="dropdown-item-order-by-date">Date</a></li>
+			</ul>
+			<div id="order-asc-desc-buttons">
+				<input type="button" value="↑" class="btn btn-secondary btn" id="order-desc-button" />
+				<input type="button" value="↓" class="btn btn-secondary btn" id="order-asc-button" />
+			</div>
+			<div id="order-apply-button">
+				<input type="submit" value="Apply" class="btn btn-secondary" id="order-button" />
+			</div>
+			<a class="btn btn-secondary" id="order-button-revert" asp-area="" asp-page="/ViewHabits">Revert</a>
+			
+		</div>
+	</div>
+</div>
+
+@* Table *@
+<div class="row text-white">
+	<div class="col-md-12" id="table-container">
+		<table class="table table-hover table-striped text-white" id="table-view-records">
 			<thead>
 				<tr>
 					<th scope="col">Habit</th>
@@ -132,7 +162,7 @@
 				@foreach (var habitRecord in Model.HabitRecords)
 				{
 					Model.RecordsTableRowCounter++;
-					<tr>
+					<tr class="text-white">
 						<td class="record-habit-name">@Model.GetHabitName(habitRecord)</td>
 						<td class="record-habit-amount">@habitRecord.Amount</td>
 						<td class="record-habit-unit">@habitRecord.Unit</td>
@@ -154,53 +184,5 @@
 				}
 			</tbody>
 		</table>
-	</div>
-	<div class="col-md-1">
-		<br />
-		<div class="row" id="order-asc-desc-buttons">
-			<div class="col-6">
-				<input type="button" value="↑" class="btn btn-secondary btn-sm" id="order-desc-button" />
-			</div>
-			<br />
-			<div class="col-6">
-				<input type="button" value="↓" class="btn btn-secondary btn-sm" id="order-asc-button" />
-			</div>
-		</div>
-	</div>
-	<div class="col-md-2">
-		<br />
-		<br />
-		<div class="row">
-			<div class="d-grid gap-2">
-				<button type="button" class="btn btn-secondary" id="filter-button" data-bs-toggle="modal" data-bs-target="#modal-filter">
-					Filter
-				</button>
-				<a class="btn btn-secondary" asp-area="" asp-page="/ViewHabits">Revert</a>
-			</div>
-		</div>
-		<br />
-		<br />
-		<div class="row">
-			<div class="dropdown" id="dropdown-order">
-				<div class="d-grid gap-2">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown-button-order" data-bs-toggle="dropdown" aria-expanded="false">
-						Order by
-					</button>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" id="dropdown-item-order-by-habit">Habit</a></li>
-						<li><a class="dropdown-item" id="dropdown-item-order-by-date">Date</a></li>
-					</ul>
-					
-					<div class="row" id="order-apply-button">
-						<div class="col-12">
-							<div class="d-grid">
-								<input type="submit" value="Apply" class="btn btn-secondary" id="order-button" />
-							</div>
-						</div>
-					</div>
-					<a class="btn btn-secondary" id="order-button-revert" asp-area="" asp-page="/ViewHabits">Revert</a>
-				</div>
-			</div>
-		</div>
 	</div>
 </div>
