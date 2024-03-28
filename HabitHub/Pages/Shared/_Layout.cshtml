@@ -32,29 +32,38 @@
     
         <nav class="navbar navbar-dark bg-dark border-body">
             <div class="container-fluid">
-                <a class="navbar-brand">HabitHub</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">HabitHub</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-link-active text-white" asp-area="" asp-page="/Index">
-                            <svg class="bi me-2" width="12" height="12"><use xlink:href="#home" /></svg>
-                            Home
-                        </a>
-                        <a class="nav-link-active text-white" asp-area="" asp-page="/AddRecord">
-                            <svg class="bi me-2" width="12" height="12"><use xlink:href="#plus" /></svg>
-                            Record habit
-                        </a>
-                        <a class="nav-link-active text-white" asp-area="" asp-page="/AddHabit">
-                            <svg class="bi me-2" width="12" height="12"><use xlink:href="#plus-folder" /></svg>
-                            Add new habit
-                        </a>
-                        <a class="nav-link-active text-white" asp-area="" asp-page="/ViewHabits">
-                            <svg class="bi me-2" width="12" height="12"><use xlink:href="#calendar" /></svg>
-                            View habits
-                        </a>
-                    </div>
+                    <br />
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link-active text-white" asp-area="" asp-page="/Index">
+                                <svg class="bi me-2" width="14" height="14"><use xlink:href="#home" /></svg>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link-active text-white" asp-area="" asp-page="/AddRecord">
+                                <svg class="bi me-2" width="14" height="14"><use xlink:href="#plus" /></svg>
+                                Record habit
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link-active text-white" asp-area="" asp-page="/AddHabit">
+                                <svg class="bi me-2" width="14" height="14"><use xlink:href="#plus-folder" /></svg>
+                                Add new habit
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link-active text-white" asp-area="" asp-page="/ViewHabits">
+                                <svg class="bi me-2" width="14" height="14"><use xlink:href="#calendar" /></svg>
+                                View habits
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>

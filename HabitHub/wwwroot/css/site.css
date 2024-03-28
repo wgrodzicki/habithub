@@ -101,12 +101,14 @@ main {
 }
 
 .nav-item {
+    text-decoration: none;
     font-size: 16px;
     padding-top: 10px;
     padding-bottom: 10px;
+
 }
 
-.nav-item:hover {
+.nav-link:hover {
     background-color: lightgray;
     color: black;
 }
@@ -118,14 +120,18 @@ main {
 
 .nav-link-active {
     text-decoration: none;
+    margin-top: 4px;
+    margin-bottom: 4px;
     padding-top: 4px;
     padding-bottom: 4px;
+    padding-left: 4px;
 }
 
-.nav-link-active:hover {
-    background-color: lightgray;
-    color: black;
-}
+    .nav-link-active:hover {
+        text-decoration: underline;
+    }
+
+
 
 /* Modals */
 .modal-header, .modal-footer {
@@ -152,5 +158,8 @@ main {
     main {
         margin-top: 40px;
         margin-right: 0px;
+    }
+    #habit-dropdown {
+        padding-top: 20px;
     }
 }
