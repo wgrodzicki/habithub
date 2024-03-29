@@ -21,30 +21,5 @@ namespace HabitHub.Pages
             _logger = logger;
             _configuration = configuration;
         }
-
-        public IActionResult GenerateReport()
-        {
-            using (var package = new ExcelPackage())
-            {
-                var worksheet = package.Workbook.Worksheets.Add("Report");
-
-                List<HabitModel> habits = new List<HabitModel>();
-                List<HabitRecordModel> habitRecords = new List<HabitRecordModel>();
-
-                using (var connection = new SqliteConnection(_configuration.GetConnectionString("ConnectionString")))
-                {
-                    connection.Open();
-                    HabitsRepository.GetAllHabits(connection, habits);
-                    HabitsRepository.GetAllHabitRecords(connection, habitRecords);
-                }
-
-                worksheet = ReportHandler.PopulateReport(worksheet, habits, habitRecords);
-
-                var excelData = package.GetAsByteArray();
-                string fileName = $"habithub_{DateTime.Now.ToString()}.xlsx";
-
-                return File(excelData, ContentType, fileName);
-            }
-        }
     }
 }

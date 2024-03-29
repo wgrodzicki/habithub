@@ -25,11 +25,15 @@
             <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z" />
             <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
         </symbol>
+        <symbol id="clipboard" viewBox="0 0 16 16">
+            <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0z" />
+            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z" />
+            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z" />
+        </symbol>
     </svg>
 
+    @* Top navbar *@
     <div class="d-block d-md-none" id="top-navbar">
-
-    
         <nav class="navbar navbar-dark bg-dark border-body">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">HabitHub</a>
@@ -54,13 +58,19 @@
                         <li class="nav-item">
                             <a class="nav-link-active text-white" asp-area="" asp-page="/AddHabit">
                                 <svg class="bi me-2" width="14" height="14"><use xlink:href="#plus-folder" /></svg>
-                                Add new habit
+                                Add habit
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link-active text-white" asp-area="" asp-page="/ViewHabits">
                                 <svg class="bi me-2" width="14" height="14"><use xlink:href="#calendar" /></svg>
-                                View habits
+                                View my habits
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link-active text-white" asp-area="" asp-page="/Reports">
+                                <svg class="bi me-2" width="14" height="14"><use xlink:href="#clipboard" /></svg>
+                                Reports
                             </a>
                         </li>
                     </ul>
@@ -69,11 +79,9 @@
         </nav>
     </div>
 
+    @* Side (main) navbar *@
     <div class="container-fluid" id="main-container">
         <div class="row">
-
-
-
             <div class="col-1 col-md-4 col-lg-3" id="navbar-column">
                 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark d-none d-md-block" id="navbar">
                     <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" asp-area="" asp-page="/Index">
@@ -96,13 +104,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-page="/AddHabit">
                                 <svg class="bi me-2" width="20" height="20"><use xlink:href="#plus-folder" /></svg>
-                                Add new habit
+                                Add habit
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-page="/ViewHabits">
                                 <svg class="bi me-2" width="20" height="20"><use xlink:href="#calendar" /></svg>
-                                View habits
+                                View my habits
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Reports">
+                                <svg class="bi me-2" width="20" height="20"><use xlink:href="#clipboard" /></svg>
+                                Reports
                             </a>
                         </li>
                     </ul>
@@ -110,7 +124,7 @@
                 </div>
             </div>
 
-
+            @* Main part of the page *@
             <div class="col-10 col-md-8 col-lg-9">
                 <main role="main" class="pb-3">
                     @RenderBody()

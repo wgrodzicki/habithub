@@ -15,7 +15,28 @@ public static class ReportHandler
         worksheet.Cells["C1"].Value = "Unit";
         worksheet.Cells["D1"].Value = "Date";
 
+        // Habit names
+        List<string> habitNames = new List<string>();
+        foreach (HabitRecordModel habitRecord in habitRecords)
+        {
+            var habit = habits.Find(x => x.Id == habitRecord.HabitsId);
 
+            if (habit != null)
+                habitNames.Add(habit.HabitName);
+        }
+        worksheet.Cells[2, 1, habitRecords.Count + 1, 1].FillList(habitNames);
+
+        // Amounts
+        var amounts = habitRecords.Select(x => x.Amount).ToList();
+        worksheet.Cells[2, 2,  habitRecords.Count + 1, 2].FillList(amounts);
+
+        // Units
+        var units = habitRecords.Select(x => x.Unit).ToList();
+        worksheet.Cells[2, 3, habitRecords.Count + 1, 3].FillList(units);
+        
+        // Dates
+        var dates = habitRecords.Select(x => x.Date.ToString()).ToList();
+        worksheet.Cells[2, 4, habitRecords.Count + 1, 4].FillList(dates);
 
         return worksheet;
     }

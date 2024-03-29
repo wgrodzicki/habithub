@@ -3,7 +3,7 @@
 // Front-end:
 // -> Side navbar ✓
 // -> Color pallette ✓
-// -> Full responsiveness
+// -> Full responsiveness ✓
 // -> Filled empty space on the right
 // -> Filled empty space in the navbar
 // -> Modal to edit existing habit ✓
@@ -32,6 +32,8 @@
 // -> User account
 // -> Authentication
 // -> Password hashing
-// -> Export/import habits to/from Excel
+// -> Export/import habits to/from Excel:
+//		-exporting
+//		-importing ✓
 // -> Unit tests
 // -> Credits page

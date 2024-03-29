@@ -1,0 +1,12 @@
+﻿@page
+@model HabitHub.Pages.ReportsModel
+@{
+	ViewData["Title"] = "Reports";
+}
+
+<h3 class="text-white">Reports</h3>
+<hr class="text-white" />
+<br />
+<form method="post" asp-page-handler="GenerateReport">
+	<input type="submit" value="Download report" class="btn btn-secondary" />
+</form>
