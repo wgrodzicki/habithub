@@ -11,7 +11,7 @@
 		<form method="post" asp-page-handler="Add" id="habit-add-form">
 			<div class="form-group">
 				<label asp-for="Habit.HabitName" class="control-label">Habit name</label>
-				<input type="text" asp-for="Habit.HabitName" class="form-control" />
+				<input type="text" asp-for="Habit.HabitName" class="form-control" id="habit-add-input" />
 				<span asp-validation-for="Habit.HabitName" class="text-danger"></span>
 				<label class="control-label" id="habit-warning">@Model.HabitWarning</label>
 			</div>

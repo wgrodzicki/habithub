@@ -45,7 +45,8 @@ main {
     border-color: #012e00;
 }
 
-#habit-warning {
+.text-danger, #habit-warning {
+    color: white !important;
     font-size: 12px;
 }
 

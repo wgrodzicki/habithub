@@ -52,6 +52,13 @@ function cleanForms() {
         }
         forms[i].value = null;
     }
+
+    // Clear warning when clicking on the input form
+    if (document.title == "Add habit - HabitHub") {
+        document.getElementById("habit-add-input").addEventListener("click", (event) => {
+            document.getElementById("habit-warning").innerHTML = "";
+        });
+    }
 }
 
 // Retrieves habit name from the dropdown menu.
