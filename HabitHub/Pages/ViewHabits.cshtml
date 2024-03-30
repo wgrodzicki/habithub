@@ -114,14 +114,13 @@
 <h3 class="text-white">My habits</h3>
 <hr class="text-white" />
 <div class="row text-white">
-	<div class="col-6">
-
+	<div class="col-12 col-sm-6">
 		<button type="button" class="btn btn-secondary" id="filter-button" data-bs-toggle="modal" data-bs-target="#modal-filter">
 			Filter
 		</button>
 		<a class="btn btn-secondary" id="filter-button-revert" asp-area="" asp-page="/ViewHabits">Revert</a>
 	</div>
-	<div class="col-6">
+	<div class="col-12 col-sm-6">
 
 		<div class="dropdown" id="dropdown-order">
 			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown-button-order" data-bs-toggle="dropdown" aria-expanded="false">
@@ -186,3 +185,6 @@
 		</table>
 	</div>
 </div>
+
+<svg class="bi me-2" id="background-icon-large" width="300" height="300"><use xlink:href="#calendar" /></svg>
+<svg class="bi me-2" id="background-icon-small" width="250" height="250"><use xlink:href="#calendar" /></svg>

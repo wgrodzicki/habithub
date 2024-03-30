@@ -1,13 +1,20 @@
-﻿using HabitHub.Data;
-using HabitHub.Models;
+﻿using HabitHub.Models;
 using OfficeOpenXml;
 
 namespace HabitHub.Helpers;
 
 public static class ReportHandler
 {
+    /// <summary>
+    /// Populates an Excel worksheet with all recorded habits data.
+    /// </summary>
+    /// <param name="worksheet"></param>
+    /// <param name="habits"></param>
+    /// <param name="habitRecords"></param>
+    /// <returns></returns>
     public static ExcelWorksheet PopulateReport(ExcelWorksheet worksheet, List<HabitModel> habits, List<HabitRecordModel> habitRecords)
     {
+        // Column headers
         worksheet.Cells["A1:D1"].Style.Font.Size = 14.0f;
         worksheet.Cells["A1:D1"].Style.Font.Bold = true;
         worksheet.Cells["A1"].Value = "Habit";

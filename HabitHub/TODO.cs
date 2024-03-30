@@ -4,8 +4,7 @@
 // -> Side navbar ✓
 // -> Color pallette ✓
 // -> Full responsiveness ✓
-// -> Filled empty space on the right
-// -> Filled empty space in the navbar
+// -> Filled empty space on the right ✓
 // -> Modal to edit existing habit ✓
 
 // Back-end:
@@ -31,9 +30,9 @@
 // Nice-to-have:
 // -> User account
 // -> Authentication
-// -> Password hashing
 // -> Export/import habits to/from Excel:
-//		-exporting
-//		-importing ✓
+//		-exporting ✓
+//		-importing
+// -> E-mail notifications
 // -> Unit tests
 // -> Credits page

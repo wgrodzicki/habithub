@@ -5,14 +5,7 @@ html {
     min-height: 100%;
 }
 
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-}
-
 body {
-  /*margin-bottom: 60px;*/
   background-color: #495057;
   height: 100vh;
 }
@@ -26,20 +19,20 @@ main {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-#main-container {
-    /*width: 100vw;*/
-    /*margin-left: 0px;*/
-    /*margin-right: 0px;*/
-    padding-left: 0px;
-    /*padding-right: 0px;*/
-}
-
 .form-control {
     max-width: 200px;
 }
 
+#main-container {
+    padding-left: 0px;
+}
+
 #habit-dropdown, #habit-dropdown-filter {
     padding-top: 24px;
+}
+
+.form-group #habit-dropdown {
+    padding-bottom: 18px;
 }
 
 #add-habit-button, #add-record-button, #modal-save-button {
@@ -79,14 +72,23 @@ main {
     overflow-y: scroll;
 }
 
-/* Side navbar **/
+#background-icon-large, #background-icon-small {
+    color: #adb5bd;
+    opacity: 0.05;
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    z-index: -1;
+    display: none;
+}
+
+/* Side (main) navbar **/
 #navbar-column {
     font-size: 16px;
     display: flex;
     flex-wrap: nowrap;
     height: 100vh;
     max-height: 100vh;
-    /*overflow-y: hidden;*/
 }
 
 #navbar {
@@ -103,8 +105,8 @@ main {
 .nav-item {
     text-decoration: none;
     font-size: 16px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 14px;
+    padding-bottom: 14px;
 
 }
 
@@ -114,10 +116,6 @@ main {
 }
 
 /*Top navbar*/
-#top-navbar {
-    /*display: none;*/
-}
-
 .nav-link-active {
     text-decoration: none;
     margin-top: 4px;
@@ -127,11 +125,9 @@ main {
     padding-left: 4px;
 }
 
-    .nav-link-active:hover {
-        text-decoration: underline;
-    }
-
-
+.nav-link-active:hover {
+    text-decoration: underline;
+}
 
 /* Modals */
 .modal-header, .modal-footer {
@@ -142,24 +138,43 @@ main {
     background-color: #495057;
 }
 
+/*Viewport sizes*/
 @media (max-width: 992px) {
+    main {
+        margin-right: 40px;
+    }
     td {
         font-size: 12px;
     }
-    main {
-        margin-right: 40px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+    #background-icon-large {
+        display: initial;
     }
 }
 
 @media (max-width: 768px) {
-    td {
-        font-size: 10px;
-    }
     main {
         margin-top: 40px;
         margin-right: 0px;
     }
+    td {
+        font-size: 10px;
+    }
     #habit-dropdown {
         padding-top: 20px;
+    }
+    #background-icon-small {
+        display: initial;
+    }
+}
+
+@media (max-height: 576px) {
+    #background-icon-large, #background-icon-small {
+        display: none;
     }
 }

@@ -200,8 +200,7 @@ function orderRecords(orderAsc) {
     // Order by date
     } else if (orderByDate) {
         indexAndHabit = getOrderByDate(indexAndHabit, recordsTableRows, orderAsc);
-    }
-    else {
+    } else {
         isOrderedAsc = false;
         orderByHabit = false;
         orderByDate = false;
