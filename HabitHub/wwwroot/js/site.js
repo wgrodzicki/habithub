@@ -10,7 +10,7 @@ let sortingDisplayed = false;
 
 document.addEventListener("DOMContentLoaded", () => {
     changeNavbarPillColor();
-    cleanForms();
+    clearForms();
 
     if (document.title == "Record habit - HabitHub"
         || document.title == "Add habit - HabitHub"
@@ -39,12 +39,12 @@ function changeNavbarPillColor() {
     }
 }
 
-// Cleans all forms on loading.
-function cleanForms() {
+// Clears all forms on loading.
+function clearForms() {
     const forms = document.getElementsByClassName("form-control");
 
     for (let i = 0; i < forms.length; i++) {
-        // Don't clean the warning
+        // Don't clear the warning
         if (document.title == "Add habit - HabitHub") {
             if (document.getElementById("habit-warning").innerHTML != "") {
                 continue;
