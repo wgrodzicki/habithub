@@ -11,6 +11,7 @@ public class AddHabitModel : PageModel
 {
 	[BindProperty] public HabitModel Habit { get; set; }
 	[BindProperty] public string HabitToDelete { get; set; }
+
 	public List<string> SavedHabits { get; set; }
 	public string HabitWarning { get; set; } = "";
 

@@ -10,6 +10,7 @@ public class AddRecordModel : PageModel
 {
 	[BindProperty] public HabitRecordModel HabitRecord { get; set; }
 	[BindProperty] public string HabitToRecord { get; set; }
+
 	public List<string> SavedHabits { get; set; }
 
 	private readonly IConfiguration _configuration;
