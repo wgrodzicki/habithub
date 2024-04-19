@@ -204,7 +204,7 @@ function orderRecords(orderAsc) {
     // Order by habit
     if (orderByHabit) {
         indexAndHabit = getOrderByHabit(indexAndHabit, recordsTableRows, orderAsc);
-    // Order by date
+        // Order by date
     } else if (orderByDate) {
         indexAndHabit = getOrderByDate(indexAndHabit, recordsTableRows, orderAsc);
     } else {

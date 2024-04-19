@@ -6,8 +6,8 @@ html {
 }
 
 body {
-  background-color: #495057;
-  height: 100vh;
+    background-color: #495057;
+    height: 100vh;
 }
 
 main {
@@ -40,10 +40,10 @@ main {
     border-color: #014000;
 }
 
-#add-habit-button:hover, #add-record-button:hover, #modal-save-button:hover {
-    background-color: #012e00;
-    border-color: #012e00;
-}
+    #add-habit-button:hover, #add-record-button:hover, #modal-save-button:hover {
+        background-color: #012e00;
+        border-color: #012e00;
+    }
 
 .text-danger, #habit-warning {
     color: white !important;
@@ -55,10 +55,10 @@ main {
     border-color: #6C2126;
 }
 
-#delete-habit-button:hover, #delete-record-button:hover {
-    background-color: #4f161a;
-    border-color: #4f161a;
-}
+    #delete-habit-button:hover, #delete-record-button:hover {
+        background-color: #4f161a;
+        border-color: #4f161a;
+    }
 
 #filter-button, #filter-button-revert, #dropdown-order {
     margin-bottom: 20px;
@@ -108,7 +108,6 @@ main {
     font-size: 16px;
     padding-top: 14px;
     padding-bottom: 14px;
-
 }
 
 .nav-link:hover {
@@ -126,9 +125,9 @@ main {
     padding-left: 4px;
 }
 
-.nav-link-active:hover {
-    text-decoration: underline;
-}
+    .nav-link-active:hover {
+        text-decoration: underline;
+    }
 
 /* Modals */
 .modal-header, .modal-footer {
@@ -144,6 +143,7 @@ main {
     main {
         margin-right: 40px;
     }
+
     td {
         font-size: 12px;
     }
@@ -153,6 +153,7 @@ main {
     html {
         font-size: 16px;
     }
+
     #background-icon-large {
         display: initial;
     }
@@ -163,12 +164,15 @@ main {
         margin-top: 40px;
         margin-right: 0px;
     }
+
     td {
         font-size: 10px;
     }
+
     #habit-dropdown {
         padding-top: 20px;
     }
+
     #background-icon-small {
         display: initial;
     }

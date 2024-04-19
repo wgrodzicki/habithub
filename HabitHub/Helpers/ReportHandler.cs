@@ -36,12 +36,12 @@ public static class ReportHandler
 
         // Amounts
         var amounts = habitRecords.Select(x => x.Amount).ToList();
-        worksheet.Cells[2, 2,  habitRecords.Count + 1, 2].FillList(amounts);
+        worksheet.Cells[2, 2, habitRecords.Count + 1, 2].FillList(amounts);
 
         // Units
         var units = habitRecords.Select(x => x.Unit).ToList();
         worksheet.Cells[2, 3, habitRecords.Count + 1, 3].FillList(units);
-        
+
         // Dates
         var dates = habitRecords.Select(x => x.Date.ToString()).ToList();
         worksheet.Cells[2, 4, habitRecords.Count + 1, 4].FillList(dates);

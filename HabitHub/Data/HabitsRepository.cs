@@ -18,7 +18,7 @@ public static class HabitsRepository
 
         var tableCmd = connection.CreateCommand();
         tableCmd.CommandText =
-            $@"SELECT * FROM habits
+           $@"SELECT * FROM habits
                WHERE habit_name = '{habitToAdd.HabitName}';";
         tableCmd.CommandType = System.Data.CommandType.Text;
 
