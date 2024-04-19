@@ -103,8 +103,8 @@ public static class HabitsRepository
         var tableCmd = connection.CreateCommand();
         tableCmd.CommandText =
             $@"SELECT id FROM habits
-			   WHERE habit_name LIKE '%{habitName}%'
-			   LIMIT 1;";
+               WHERE habit_name LIKE '%{habitName}%'
+               LIMIT 1;";
         tableCmd.CommandType = System.Data.CommandType.Text;
 
         SqliteDataReader reader = tableCmd.ExecuteReader();
@@ -128,7 +128,7 @@ public static class HabitsRepository
         var tableCmd = connection.CreateCommand();
         tableCmd.CommandText =
             $@"DELETE FROM habits
-			   WHERE habit_name LIKE '%{habitToDelete}%';";
+               WHERE habit_name LIKE '%{habitToDelete}%';";
         tableCmd.ExecuteNonQuery();
     }
 
@@ -143,10 +143,10 @@ public static class HabitsRepository
         var tableCmd = connection.CreateCommand();
         tableCmd.CommandText =
             @$"INSERT INTO habit_records(habits_id, amount, unit, date)
-			   VALUES((SELECT id
-					   FROM habits
-					   WHERE habit_name = '{habitToRecord}'),
-					   '{habitRecord.Amount}', '{habitRecord.Unit}', '{habitRecord.Date}');";
+               VALUES((SELECT id
+                       FROM habits
+                       WHERE habit_name = '{habitToRecord}'),
+                       '{habitRecord.Amount}', '{habitRecord.Unit}', '{habitRecord.Date}');";
         tableCmd.ExecuteNonQuery();
     }
 
@@ -188,8 +188,8 @@ public static class HabitsRepository
         var tableCmd = connection.CreateCommand();
         tableCmd.CommandText =
             $@"UPDATE habit_records
-			   SET habits_id = {habitId}, amount = {recordToUpdate.Amount}, unit = '{recordToUpdate.Unit}', date = '{recordToUpdate.Date}'
-			   WHERE id = {recordToUpdate.Id}";
+               SET habits_id = {habitId}, amount = {recordToUpdate.Amount}, unit = '{recordToUpdate.Unit}', date = '{recordToUpdate.Date}'
+               WHERE id = {recordToUpdate.Id}";
         tableCmd.ExecuteNonQuery();
     }
 
@@ -203,7 +203,7 @@ public static class HabitsRepository
         var tableCmd = connection.CreateCommand();
         tableCmd.CommandText =
             $@"DELETE FROM habit_records
-			   WHERE id = {recordToDelete};";
+               WHERE id = {recordToDelete};";
         tableCmd.ExecuteNonQuery();
     }
 }
